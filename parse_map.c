@@ -1,0 +1,130 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/13 16:48:32 by adardour          #+#    #+#             */
+/*   Updated: 2023/08/13 22:35:34 by adardour         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
+
+void	fill_array_2d(t_data *data, int count, char *start_map)
+{
+	char	*line;
+	int		fd;
+
+	fd = open("cub.cub", O_RDWR);
+	if (fd == -1)
+	{
+		perror("");
+		exit(1);
+	}
+	line = get_next_line(fd);
+	while (strcmp(line, start_map))
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+	data->map_represent = malloc((sizeof(char *) * count) + 1);
+	if (!data->map_represent)
+	{
+		perror("");
+		exit(1);
+	}
+	free(line);
+	fill(fd, data, count, start_map);
+	close(fd);
+}
+
+int	get_number_of_lines(char *start, int fd)
+{
+	int		count;
+	char	*line;
+
+	line = get_next_line(fd);
+	while (strcmp(start, line))
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+	count = 0;
+	while (line)
+	{
+		free(line);
+		line = get_next_line(fd);
+		count++;
+	}
+	return (count);
+}
+
+int	check_spaces_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (i < ft_strlen(line) - 1)
+	{
+		if (line[i] != ' ' && line[i] != '\t')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+void	check_lines(char *start_map)
+{
+	char	*line;
+	int		fd;
+
+	fd = open("cub.cub", O_RDWR);
+	if (fd == -1)
+	{
+		perror("");
+		exit(1);
+	}
+	line = get_next_line(fd);
+	while (line && strcmp(line, start_map))
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+	while (line)
+	{
+		if (!strcmp(line, "\n") || !check_spaces_line(line))
+		{
+			printf("error encountered\n");
+			exit(1);
+		}
+		free(line);
+		line = get_next_line(fd);
+	}
+}
+
+void	parse_map(t_data *data, int reached_map)
+{
+	char	*start_map;
+	int		last_map;
+	int		fd;
+	int		i;
+	int		count;
+
+	fd = open("cub.cub", O_RDWR, 0777);
+	i = 0;
+	if (fd == -1)
+	{
+		perror("");
+		exit(1);
+	}
+	start_map = get_begin(reached_map, fd);
+	check_lines(start_map);
+	close(fd);
+	fd = open("cub.cub", O_RDWR);
+	count = get_number_of_lines(start_map, fd);
+	close(fd);
+	fill_array_2d(data, count, start_map);
+	free(start_map);
+}
