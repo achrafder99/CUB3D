@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 12:20:19 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/13 22:41:18 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:03:59 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,25 @@
 char	*get_begin(int reached_map, int fd)
 {
 	char	*line;
-	char	*first_line;
-	char	*old;
+	char	*close_file;
 
-	while (reached_map)
+	line = get_next_line(fd);
+	while (--reached_map > 0 && line)
 	{
-		line = get_next_line(fd);
 		free(line);
-		reached_map--;
+		line = get_next_line(fd);
 	}
-	while (!ft_strchr(line, '1') && line)
+	while (line && !strcmp(line, "\n"))
 	{
-		line = get_next_line(fd);
-		old = first_line;
-		first_line = ft_strdup(line);
-		free(old);
 		free(line);
+		line = get_next_line(fd);
 	}
-	while (line)
+	close_file = get_next_line(fd);
+	while (close_file)
 	{
-		line = get_next_line(fd);
-		free(line);
+		free(close_file);
+		close_file = get_next_line(fd);
 	}
 	close(fd);
-	return (first_line);
+	return (line);
 }

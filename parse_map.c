@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:48:32 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/13 22:35:34 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/14 21:32:19 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,15 @@ int	check_spaces_line(char *line)
 	return (0);
 }
 
-void	check_lines(char *start_map)
+void	check_lines(char *start_map, int count)
 {
+	int		i;
 	char	*line;
 	int		fd;
+	char	*last_line;
 
+	i = 1;
+	last_line = NULL;
 	fd = open("cub.cub", O_RDWR);
 	if (fd == -1)
 	{
@@ -92,6 +96,8 @@ void	check_lines(char *start_map)
 		free(line);
 		line = get_next_line(fd);
 	}
+	if (count == 1)
+		return;
 	while (line)
 	{
 		if (!strcmp(line, "\n") || !check_spaces_line(line))
@@ -101,6 +107,19 @@ void	check_lines(char *start_map)
 		}
 		free(line);
 		line = get_next_line(fd);
+		i++;
+		if (i == count)
+		{
+			last_line = ft_strdup(line);
+			free(line);
+			break ;
+		}
+	}
+	if (ft_strchr(last_line, '\n'))
+	{
+		printf("error encountered\n");
+		free(last_line);
+		exit(1);
 	}
 }
 
@@ -120,10 +139,9 @@ void	parse_map(t_data *data, int reached_map)
 		exit(1);
 	}
 	start_map = get_begin(reached_map, fd);
-	check_lines(start_map);
-	close(fd);
 	fd = open("cub.cub", O_RDWR);
 	count = get_number_of_lines(start_map, fd);
+	check_lines(start_map, count);
 	close(fd);
 	fill_array_2d(data, count, start_map);
 	free(start_map);

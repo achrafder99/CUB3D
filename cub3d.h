@@ -6,13 +6,27 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 11:47:40 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/13 21:56:48 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/14 19:06:06 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 #define CUB3D_H
 
+#define TAILED 	32;
+
+#include	"./get_next_line/get_next_line.h"
+#include	<fcntl.h>
+#include 	<mlx.h>
+#include 	<math.h>
+
+typedef struct t_vars
+{
+	void	*mlx_ptr;
+	void	*mlx_win;
+	int		rows;
+	int		column;
+}	t_vars;
 
 typedef struct t_texture
 {
@@ -44,10 +58,6 @@ typedef struct t_data
 	char		**map_represent;
 }	t_data;
 
-
-#include	"./get_next_line/get_next_line.h"
-#include	<fcntl.h>
-
 char	*ft_strchr(char *s, int c);
 const 	char	*ft_strstr(const char *haystack, const char *needle);
 char	**ft_split(char *str, int del);
@@ -66,4 +76,7 @@ void	put_rgb(t_data *data, char *line, char identifier);
 void	parse_map(t_data *data, int reached_map);
 int		check_spaces(char *line);
 void	fill(int fd, t_data *data, int count, char *start_map);
+int		check_map(char **represent_map);
+void	check_symbols(char	**represent_map);
+void    start_drawing(t_data *data);
 #endif
