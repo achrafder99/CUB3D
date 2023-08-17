@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 14:03:03 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/14 12:06:29 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/15 10:04:53 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,11 @@ char	**ft_split(char *line, int del)
 	spliting = malloc((sizeof(char *) * count) + 1);
 	if (!spliting)
 		return (NULL);
-	i = -1;
-	while (++i < count)
+	i = 0;
+	while (i < count)
 	{
+		while (*line != '\0' && *line == del)
+			del++;
 		if (*line != '\0' && *line != del)
 		{
 			j = 0;
@@ -67,6 +69,7 @@ char	**ft_split(char *line, int del)
 			while (*line != '\0' && *line == del)
 				line++;
 		}
+		i++;
 	}
 	spliting[i] = NULL;
 	return (spliting);

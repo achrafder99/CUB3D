@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:48:05 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/14 13:25:18 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/17 13:52:55 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	check_identifier(char *line)
 		else if (spliting[0][0] == 'F' && spliting[0][1] != '\0')
 			return (free_things(spliting), 0);
 	}
+	free_things(spliting);
 	return (1);
 }
 
@@ -103,7 +104,7 @@ void	put(char *line, t_data *data, char i)
 	free_things(spliting);
 }
 
-void	put_data(t_data *data, int fd, int *reached_map)
+int	put_data(t_data *data, int fd, int *reached_map)
 {
 	int		flags;
 	char	*line;
@@ -113,8 +114,8 @@ void	put_data(t_data *data, int fd, int *reached_map)
 	while (line != NULL)
 	{
 		if (!check_identifier(line))
-			return (printf("some identifier not valid\n"), exit(1));
-		if (line[0] == 'N' || line[0] == 'S' \
+			return (printf("some identifier not valid\n"), 0);
+		else if (line[0] == 'N' || line[0] == 'S' \
 		|| line[0] == 'W' || line[0] == 'E' \
 		|| line[0] == 'F' || line[0] == 'C')
 		{
@@ -128,4 +129,5 @@ void	put_data(t_data *data, int fd, int *reached_map)
 		free(line);
 		line = get_next_line(fd);
 	}
+	return (1);
 }

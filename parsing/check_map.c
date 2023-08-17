@@ -6,35 +6,33 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:09:48 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/14 14:32:39 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/17 13:40:58 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	check_characters(char *line, int *w, int *e, int *o)
+void	check_last_line(char **map_represent, int index_last)
 {
 	int	i;
 
-	i = 0;
-	while (line[i] != '\0')
+	if (ft_strchr(map_represent[index_last], '\n'))
 	{
-		if (line[i] != ' ' && line[i] != '\n')
+		printf("error encountered\n");
+		free_things(map_represent);
+		exit(1);
+	}
+	i = 0;
+	while (map_represent[index_last][i] != '\0')
+	{
+		if (map_represent[index_last][i] != '.')
 		{
-			if ((line[i] != '0' && line[i] != '1') \
-			&& (line[i] != 'N' && line[i] != 'S' \
-			&& line[i] != 'E' && line[i] != 'W'))
+			if (map_represent[index_last][i] != '1')
 			{
-				printf("symbol not valid\n");
+				printf("The map must be closed/surrounded by walls\n");
+				free_things(map_represent);
 				exit(1);
 			}
-			else if (line[i] == 'N' || line[i] == 'S' \
-			|| line[i] == 'E' || line[i] == 'W')
-				(*o)++;
-			else if (line[i] == '1')
-				(*w)++;
-			else if (line[i] == '0')
-				(*e)++;
 		}
 		i++;
 	}
@@ -85,7 +83,7 @@ int	get_index(char *line, int from)
 	if (from == 0)
 	{
 		i = 0;
-		while (line[i] != '\0' && (line[i] == ' ' || line[i] == '\t'))
+		while (line[i] != '\0' && (line[i] == '.' || line[i] == '\t'))
 			i++;
 	}
 	else
@@ -93,7 +91,7 @@ int	get_index(char *line, int from)
 		length = ft_strlen(line) - 1;
 		if (check_new_line(line))
 			length -= 1;
-		while (line[length] != '\0' && (line[length] == ' ' \
+		while (line[length] != '\0' && (line[length] == 'S' \
 		|| line[length] == '\t'))
 			length--;
 		i = length;
@@ -104,17 +102,28 @@ int	get_index(char *line, int from)
 int	check_map(char **represent_map)
 {
 	int	i;
+	int	j;
 
-	i = 0;
-	while (represent_map[i])
+	j = -1;
+	while (++j < ft_strlen(represent_map[0]) - 1)
 	{
-		if (represent_map[i][get_index(represent_map[i], 0)] != '1' \
-		|| represent_map[i][get_index(represent_map[i], 1)] != '1')
+		if (represent_map[0][j] != '.')
 		{
-			printf("The map must be closed/surrounded by walls\n");
-			exit(1);
+			if (represent_map[0][j] != '1')
+				return (printf(DISPLAY_ERROR), 0);
 		}
-		i++;
 	}
+	i = -1;
+	while (represent_map[++i])
+	{
+		if ((represent_map[i][get_index(represent_map[i], 0)] != '.' \
+		&& represent_map[i][get_index(represent_map[i], 1)] != '.'))
+		{
+			if ((represent_map[i][get_index(represent_map[i], 0)] != '1' \
+			|| represent_map[i][get_index(represent_map[i], 1)] != '1'))
+				return (printf(DISPLAY_ERROR), 0);
+		}
+	}
+	check_last_line(represent_map, i - 1);
 	return (1);
 }
