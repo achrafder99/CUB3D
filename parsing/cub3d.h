@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 11:47:40 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/17 13:54:17 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/17 14:18:12 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 #define DISPLAY_ERROR "The map must be closed/surrounded by walls\n"
 #define DISPLAY_ERROR1 "Therese some elements missing\n"
+#define DISPLAY_ERROR2 "color not valid expected format (R-G-B)\n"
 
 typedef struct t_texture
 {
@@ -73,7 +74,7 @@ char	*ft_strdup(char *s1);
 int		ft_atoi(const char *str);
 void	free_data(t_data *data);
 void	free_things(char **spliting);
-int		put_data(t_data *data, int fd, int *reached_map);
+int		 put_data(t_data *data, int fd, int *reached_map);
 void	parse_map(t_data *data, int reached_map);
 int		parse_element(t_data *data);
 char	*get_begin(int reached_map, int fd);
