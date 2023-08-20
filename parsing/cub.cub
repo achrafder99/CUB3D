@@ -4,7 +4,7 @@ SO ./test.xpm
 
 WE ./test.xpm
 
-EA ./test.xpm
+EA ./test.xpm;
 
 F 220,10,10
 

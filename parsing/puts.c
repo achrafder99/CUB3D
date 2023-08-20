@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:48:05 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/20 14:32:47 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/20 14:46:19 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	check_identifier(char *line)
 	char	**spliting;
 
 	spliting = ft_split(line, ' ');
-	// printf("%s\n",spliting[1]);
 	if (spliting[0] != NULL && spliting[1] != NULL)
 	{
 		if (spliting[0][0] == 'S' && spliting[0][1] != 'O' \
@@ -120,10 +119,7 @@ int	put_data(t_data *data, int fd, int *reached_map)
 	while (line != NULL)
 	{
 		if (!check_identifier(line))
-		{
-			free(line);
-			exit(1);
-		}
+			return (free(line), 0);
 		else if (line[0] == 'N' || line[0] == 'S' \
 		|| line[0] == 'W' || line[0] == 'E' \
 		|| line[0] == 'F' || line[0] == 'C')
