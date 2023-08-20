@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_element.c                                    :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/13 12:29:39 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/20 12:34:39 by adardour         ###   ########.fr       */
+/*   Created: 2023/08/20 14:37:22 by adardour          #+#    #+#             */
+/*   Updated: 2023/08/20 14:38:41 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
-int	parse_element(t_data *data)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	if (!data->texture.ea \
-	|| !data->texture.so \
-	|| !data->texture.we \
-	|| !data->texture.no \
-	|| !data->floor.r \
-	|| !data->floor.g \
-	|| !data->floor.b \
-	|| !data->ceiling.r \
-	|| !data->ceiling.g \
-	|| !data->ceiling.b)
+	unsigned char	*str1;
+	unsigned char	*str2;
+
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	while ((*str1 && *str2) && (*str1 == *str2))
 	{
-		printf("error\n");
-		return (0);
+		str1++;
+		str2++;
 	}
-	return (1);
+	return (*str1 - *str2);
 }

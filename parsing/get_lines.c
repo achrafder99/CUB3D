@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 12:20:19 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/14 14:03:59 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/20 14:35:46 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_begin(int reached_map, int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
-	while (line && !strcmp(line, "\n"))
+	while (line && !ft_strcmp(line, "\n"))
 	{
 		free(line);
 		line = get_next_line(fd);

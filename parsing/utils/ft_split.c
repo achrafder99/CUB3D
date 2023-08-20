@@ -6,11 +6,19 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 14:03:03 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/15 10:04:53 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/20 12:42:06 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+char	**allocate(char **spliting, int count)
+{
+	spliting = malloc((sizeof(char *) * count) + 1);
+	if (!spliting)
+		exit(1);
+	return (spliting);
+}
 
 int	get_length(char *line, int del)
 {
@@ -51,14 +59,12 @@ char	**ft_split(char *line, int del)
 	int		count;
 
 	count = get_count(line, del);
-	spliting = malloc((sizeof(char *) * count) + 1);
-	if (!spliting)
-		return (NULL);
-	i = 0;
-	while (i < count)
+	spliting = allocate(spliting, count);
+	i = -1;
+	while (++i < count)
 	{
 		while (*line != '\0' && *line == del)
-			del++;
+			line++;
 		if (*line != '\0' && *line != del)
 		{
 			j = 0;
@@ -69,7 +75,6 @@ char	**ft_split(char *line, int del)
 			while (*line != '\0' && *line == del)
 				line++;
 		}
-		i++;
 	}
 	spliting[i] = NULL;
 	return (spliting);

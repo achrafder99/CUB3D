@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 13:30:36 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/12 13:36:03 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/20 12:37:51 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ const char	*ft_strstr(const char *haystack, const char *needle)
 	{
 		needle_index = 0;
 		match_index = haystack_index;
-
-		while (needle[needle_index] != '\0' &&
+		while (needle[needle_index] != '\0' && \
 			haystack[match_index] == needle[needle_index])
 		{
 			match_index++;
@@ -38,4 +37,3 @@ const char	*ft_strstr(const char *haystack, const char *needle)
 	}
 	return (NULL);
 }
-

@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 14:54:02 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/14 11:01:15 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/20 12:37:57 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*ft_strdup(char *s1)
 {
 	char	*ptr;
 	size_t	i;
-	
+
 	if (!s1)
 		return (NULL);
 	ptr = (char *)malloc(ft_strlen(s1) + 1);

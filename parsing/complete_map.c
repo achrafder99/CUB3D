@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:43:21 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/17 13:32:31 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/20 12:20:14 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,58 +26,32 @@ int	check_line(char *line)
 	return (0);
 }
 
-void	fill_line(char *line, char *return_line, int *check, int fill_line)
+char	*complete_line(char *line, int longest_length)
 {
-	int	i;
+	char	*return_line;
+	int		rest;
+	int		i;
 
+	rest = longest_length - strlen(line);
+	if (check_line(line))
+		rest += 1;
+	return_line = malloc((sizeof(char) * longest_length) + 1);
+	if (!return_line)
+		return (NULL);
 	i = -1;
-	while (line[++i] != '\0')
+	while (++i < longest_length && line[i] != '\0' && line[i] != '\n')
 	{
 		if (line[i] != '\n')
 		{
-			if (line[i] != ' ')
-			{
-				return_line[i] = line[i];
-				(*check)++;
-			}
-			else
-			{
+			if (line[i] == ' ')
 				return_line[i] = '.';
-				(*check)++;
-			}
+			else
+				return_line[i] = line[i];
 		}
 	}
-	while (i++ < fill_line)
-	{
-		return_line[*check] = '.';
-		(*check)++;
-	}
-}
-
-char	*complete_line(char *line, int longest_length)
-{
-	int		dd;
-	char	*return_line;
-	int		flags;
-	int		check;
-
-	flags = 0;
-	check = 0;
-	dd = longest_length - strlen(line);
-	if (!check_line(line))
-		longest_length -= 1;
-	else
-		flags = 1;
-	return_line = malloc((sizeof(char) * longest_length) + 1);
-	if (!return_line)
-		exit(1);
-	fill_line(line, return_line, &check, longest_length);
-	if (flags)
-	{
-		return_line[check] = '\n';
-		check += 1;
-	}
-	return_line[check] = '\0'; 
+	while (rest--)
+		return_line[i++] = '.';
+	return_line[i] = '\0';
 	return (return_line);
 }
 
@@ -91,6 +65,11 @@ void	complete_the_map(int longest_length, t_data *data)
 		free(data->map_represent[i]);
 		data->map_represent[i] = complete_line(data->map_represent[i], \
 		longest_length);
+		if (data->map_represent[i] == NULL)
+		{
+			perror("");
+			exit(1);
+		}
 		i++;
 	}
 }
@@ -102,10 +81,16 @@ int	get_longest_length(char **represent_map)
 
 	index = 0;
 	length = ft_strlen(represent_map[0]);
+	if (check_line(represent_map[0]))
+		length -= 1;
 	while (represent_map[index])
 	{
 		if (ft_strlen(represent_map[index]) > length)
+		{
 			length = ft_strlen(represent_map[index]);
+			if (check_line(represent_map[index]))
+				length -= 1;
+		}
 		index++;
 	}
 	return (length);

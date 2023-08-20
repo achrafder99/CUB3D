@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_data.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/12 17:35:02 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/20 12:36:56 by adardour         ###   ########.fr       */
+/*   Created: 2023/08/19 21:02:32 by adardour          #+#    #+#             */
+/*   Updated: 2023/08/20 12:37:10 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	free_data(t_data *data)
+char	*ft_substr(char *s, unsigned int start, size_t len)
 {
-	free(data->texture.no);
-	free(data->texture.so);
-	free(data->texture.ea);
-	free(data->texture.ea);
-	free(data->ceiling.r);
-	free(data->ceiling.g);
-	free(data->ceiling.b);
-	free(data->floor.r);
-	free(data->floor.g);
-	free(data->floor.b);
-	free(data);
-}
+	char	*substr;
+	size_t	i;
 
-void	free_things(char **spliting)
-{
-	int	i;
-
+	if (s == NULL)
+		return (NULL);
+	if (len > ft_strlen(s))
+		len = ft_strlen(s) - start;
+	if (start >= (unsigned long)ft_strlen(s))
+		return (ft_strdup(""));
+	substr = (char *)malloc(sizeof(char) * (len + 1));
+	if (substr == NULL)
+		return (NULL);
 	i = 0;
-	while (spliting[i])
+	while (s[i] != '\0' && i < len)
 	{
-		free(spliting[i]);
+		substr[i] = s[start];
 		i++;
+		start++;
 	}
-	free(spliting);
+	substr[len] = '\0';
+	return (substr);
 }

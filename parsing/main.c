@@ -6,27 +6,44 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 12:23:34 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/17 14:27:58 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/20 14:41:49 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check(char *color)
+int	open_file(char *filename)
 {
-	int	i;
+	int		fd;
+	char	*substr;
 
-	i = 0;
-	while (i < ft_strlen(color))
+	substr = ft_substr(filename, 0, ft_strlen(filename) - 1);
+	fd = open(substr, O_RDWR);
+	free(substr);
+	return (fd);
+}
+
+void	open_texture(char *n, char *s, char *w, char *e)
+{
+	int	fd_n;
+	int	fd_s;
+	int	fd_w;
+	int	fd_e;
+
+	fd_n = open_file(n);
+	fd_s = open_file(s);
+	fd_w = open_file(w);
+	fd_e = open_file(e);
+	if (fd_n == -1 || fd_s == -1 || fd_w == -1 || fd_e == -1)
+		return (perror(""), exit(1));
+	if (((ft_strcmp(ft_strrchr(n, '.') + 1, "xpm")) - '\n') != 0 || \
+	((ft_strcmp(ft_strrchr(s, '.') + 1, "xpm")) - '\n') != 0 || \
+	((ft_strcmp(ft_strrchr(w, '.') + 1, "xpm")) - '\n') != 0 || \
+	((ft_strcmp(ft_strrchr(w, '.') + 1, "xpm")) - '\n') != 0)
 	{
-		if (color[i] != '\n')
-		{
-			if (color[i] >= 'a' && color[i] <= 'z')
-				return (0);
-		}
-		i++;
+		printf("the format path must be (.xpm)\n");
+		exit(1);
 	}
-	return (1);
 }
 
 int	check_car(char *r, char *g, char *b)
@@ -39,36 +56,28 @@ int	check_car(char *r, char *g, char *b)
 	while (i < 3)
 	{
 		if (i == 0)
-			check_ += check(r);
+			check_ += check_color(r);
 		else if (i == 1)
-			check_ += check(g);
+			check_ += check_color(g);
 		else if (i == 2)
-			check_ += check(b);
+			check_ += check_color(b);
 		i++;
 	}
 	return (check_);
 }
 
-int	check_rgbs(t_ceiling ceiling, t_floor floor)
-{
-	if (check_car(ceiling.R, ceiling.G, ceiling.B) != 3 \
-	|| check_car(floor.R, floor.G, floor.B) != 3)
-		return (0);
-	return (1);
-}
-
 void	init(t_data *data)
 {
-	data->texture.EA = NULL;
-	data->texture.SO = NULL;
-	data->texture.NO = NULL;
-	data->texture.WE = NULL;
-	data->ceiling.B = NULL;
-	data->ceiling.R = NULL;
-	data->ceiling.G = NULL;
-	data->floor.B = NULL;
-	data->floor.R = NULL;
-	data->floor.G = NULL;
+	data->texture.ea = NULL;
+	data->texture.so = NULL;
+	data->texture.no = NULL;
+	data->texture.we = NULL;
+	data->ceiling.b = NULL;
+	data->ceiling.r = NULL;
+	data->ceiling.g = NULL;
+	data->floor.b = NULL;
+	data->floor.r = NULL;
+	data->floor.g = NULL;
 }
 
 int	main(int c, char**argv)
@@ -80,20 +89,20 @@ int	main(int c, char**argv)
 	reached_map = 0;
 	fd = open("cub.cub", O_RDWR, 0777);
 	if (fd == -1)
-	{
-		perror(""); 
-		return (0);
-	}
+		return (perror(""), 0);
 	data = malloc(sizeof(t_data));
 	init(data); 
-	if (!put_data(data, fd, &reached_map)  || reached_map < 6)
+	if (!put_data(data, fd, &reached_map) || reached_map < 6)
 		return (printf(DISPLAY_ERROR1), 1);
 	if (!check_rgbs(data->ceiling, data->floor))
 		return (printf(DISPLAY_ERROR2));
-	close(fd);
+	close(fd); 
 	parse_map(data, reached_map);
 	check_symbols(data->map_represent);
 	complete_the_map(get_longest_length(data->map_represent), data);
+	colors(data);
+	open_texture(data->texture.no, data->texture.so, data->texture.we, \
+	data->texture.ea);
 	if (!check_map(data->map_represent))
 		exit(1);
 	free_data(data);

@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:48:05 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/17 13:52:55 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/20 14:32:47 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,20 @@
 
 void	put_things(t_data *data, char	**spliting, int flags)
 {
+	if (!spliting[1] || !spliting[2])
+	{
+		printf("color not valid\n");
+		exit(1);
+	}
 	if (flags == 0)
 	{
-		data->floor.G = ft_strdup(spliting[1]);
-		data->floor.B = ft_strdup(spliting[2]);
+		data->floor.g = ft_strdup(spliting[1]);
+		data->floor.b = ft_strdup(spliting[2]);
 	}
 	else
 	{
-		data->ceiling.G = ft_strdup(spliting[1]);
-		data->ceiling.B = ft_strdup(spliting[2]);
+		data->ceiling.g = ft_strdup(spliting[1]);
+		data->ceiling.b = ft_strdup(spliting[2]);
 	}
 }
 
@@ -31,6 +36,7 @@ int	check_identifier(char *line)
 	char	**spliting;
 
 	spliting = ft_split(line, ' ');
+	// printf("%s\n",spliting[1]);
 	if (spliting[0] != NULL && spliting[1] != NULL)
 	{
 		if (spliting[0][0] == 'S' && spliting[0][1] != 'O' \
@@ -50,8 +56,8 @@ int	check_identifier(char *line)
 			return (free_things(spliting), 0);
 		else if (spliting[0][0] == 'F' && spliting[0][1] != '\0')
 			return (free_things(spliting), 0);
+		free_things(spliting);
 	}
-	free_things(spliting);
 	return (1);
 }
 
@@ -66,7 +72,7 @@ void	put_rgb(t_data *data, char *line, char identifier)
 		if (spliting[0][0] == 'F')
 		{
 			dd = ft_split(spliting[0], ' ');
-			data->floor.R = ft_strdup(dd[1]);
+			data->floor.r = ft_strdup(dd[1]);
 			free_things(dd);
 		}
 		put_things(data, spliting, 0);
@@ -76,7 +82,7 @@ void	put_rgb(t_data *data, char *line, char identifier)
 		if (spliting[0][0] == 'C')
 		{
 			dd = ft_split(spliting[0], ' ');
-			data->ceiling.R = ft_strdup(dd[1]);
+			data->ceiling.r = ft_strdup(dd[1]);
 			free_things(dd);
 		}
 		put_things(data, spliting, 1);
@@ -90,13 +96,13 @@ void	put(char *line, t_data *data, char i)
 
 	spliting = ft_split(line, ' ');
 	if (i == 'N')
-		data->texture.NO = ft_strdup(spliting[1]);
+		data->texture.no = ft_strdup(spliting[1]);
 	if (i == 'S')
-		data->texture.SO = ft_strdup(spliting[1]);
+		data->texture.so = ft_strdup(spliting[1]);
 	if (i == 'W')
-		data->texture.WE = ft_strdup(spliting[1]);
+		data->texture.we = ft_strdup(spliting[1]);
 	if (i == 'E')
-		data->texture.EA = ft_strdup(spliting[1]);
+		data->texture.ea = ft_strdup(spliting[1]);
 	if (i == 'F')
 		put_rgb(data, line, 'F');
 	if (i == 'C')
@@ -114,7 +120,10 @@ int	put_data(t_data *data, int fd, int *reached_map)
 	while (line != NULL)
 	{
 		if (!check_identifier(line))
-			return (printf("some identifier not valid\n"), 0);
+		{
+			free(line);
+			exit(1);
+		}
 		else if (line[0] == 'N' || line[0] == 'S' \
 		|| line[0] == 'W' || line[0] == 'E' \
 		|| line[0] == 'F' || line[0] == 'C')

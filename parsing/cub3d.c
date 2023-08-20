@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 11:48:08 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/13 16:58:27 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/20 14:35:57 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	get_length_line(char *line)
 
 	i = 0;
 	length = 0;
-	while (line[i] != '\0' && strcmp(line, "\n"))
+	while (line[i] != '\0' && ft_strcmp(line, "\n"))
 	{
 		if (line[i] != ' ' && line[i] != '\t')
 			length++;
@@ -80,7 +80,7 @@ void	fill_map(char *first_line, t_data *data, int count)
 	if (fd == -1)
 		return (perror(""), exit(1));
 	line = get_next_line(fd);
-	while (strcmp(line, first_line))
+	while (ft_strcmp(line, first_line))
 	{
 		line = get_next_line(fd);
 		free(line);
@@ -107,7 +107,7 @@ int	get_lines(int fd)
 	count = 1;
 	while (line != NULL)
 	{
-		if (strcmp(line, "\n") && check_spaces(line))
+		if (ft_strcmp(line, "\n") && check_spaces(line))
 			count++;
 		free(line);
 		line = get_next_line(fd);

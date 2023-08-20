@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_element.c                                    :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/13 12:29:39 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/20 12:34:39 by adardour         ###   ########.fr       */
+/*   Created: 2023/08/20 14:41:01 by adardour          #+#    #+#             */
+/*   Updated: 2023/08/20 14:42:35 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
-int	parse_element(t_data *data)
+char	*ft_strrchr(char *s, int c)
 {
-	if (!data->texture.ea \
-	|| !data->texture.so \
-	|| !data->texture.we \
-	|| !data->texture.no \
-	|| !data->floor.r \
-	|| !data->floor.g \
-	|| !data->floor.b \
-	|| !data->ceiling.r \
-	|| !data->ceiling.g \
-	|| !data->ceiling.b)
+	int	length;
+
+	length = ft_strlen(s);
+	if (c == 0)
+		return ((char *)s + length);
+	while (length--)
 	{
-		printf("error\n");
-		return (0);
+		if (s[length] == (unsigned char)c)
+			return ((char *)s + length);
 	}
-	return (1);
+	return (NULL);
 }

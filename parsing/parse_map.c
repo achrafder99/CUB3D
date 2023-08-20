@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:48:32 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/15 10:21:54 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/20 14:35:22 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	fill_array_2d(t_data *data, int count, char *start_map)
 		exit(1);
 	}
 	line = get_next_line(fd);
-	while (strcmp(line, start_map))
+	while (ft_strcmp(line, start_map))
 	{
 		free(line);
 		line = get_next_line(fd);
@@ -46,7 +46,7 @@ int	get_number_of_lines(char *start, int fd)
 	char	*line;
 
 	line = get_next_line(fd);
-	while (strcmp(start, line))
+	while (ft_strcmp(start, line))
 	{
 		free(line);
 		line = get_next_line(fd);
@@ -91,6 +91,11 @@ void	parse_map(t_data *data, int reached_map)
 		exit(1);
 	}
 	start_map = get_begin(reached_map, fd);
+	if (start_map == NULL)
+	{
+		printf("the map must be the last\n");
+		exit(1);
+	}
 	fd = open("cub.cub", O_RDWR);
 	count = get_number_of_lines(start_map, fd);
 	close(fd);
