@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:48:05 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/20 14:46:19 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/23 13:16:53 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	put_things(t_data *data, char	**spliting, int flags)
 {
-	if (!spliting[1] || !spliting[2])
+	if (spliting[3])
 	{
 		printf("color not valid\n");
 		exit(1);
@@ -32,11 +32,16 @@ void	put_things(t_data *data, char	**spliting, int flags)
 }
 
 int	check_identifier(char *line)
-{
+{	
+	static int flag;
 	char	**spliting;
-
 	spliting = ft_split(line, ' ');
-	if (spliting[0] != NULL && spliting[1] != NULL)
+	if (flag < 6)
+	{
+		if (!spliting[0] || !spliting[1])
+			return (free_things(spliting), 0);
+	}
+	else if (spliting[0] != NULL && spliting[1] != NULL)
 	{
 		if (spliting[0][0] == 'S' && spliting[0][1] != 'O' \
 		&& spliting[0][1] != '\0')
@@ -55,8 +60,9 @@ int	check_identifier(char *line)
 			return (free_things(spliting), 0);
 		else if (spliting[0][0] == 'F' && spliting[0][1] != '\0')
 			return (free_things(spliting), 0);
-		free_things(spliting);
 	}
+	free_things(spliting);
+	flag++;
 	return (1);
 }
 
@@ -118,19 +124,24 @@ int	put_data(t_data *data, int fd, int *reached_map)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		if (!check_identifier(line))
-			return (free(line), 0);
-		else if (line[0] == 'N' || line[0] == 'S' \
-		|| line[0] == 'W' || line[0] == 'E' \
-		|| line[0] == 'F' || line[0] == 'C')
+		if (ft_strcmp(line, "\n"))
 		{
-			put(line, data, line[0]);
-			(*reached_map)++;
+			if (!check_identifier(line))
+				return (free(line), 0);
+			else if (line[0] == 'N' || line[0] == 'S' \
+			|| line[0] == 'W' || line[0] == 'E' \
+			|| line[0] == 'F' || line[0] == 'C')
+			{
+				put(line, data, line[0]);
+				(*reached_map)++;
+			}
+			else
+				flags++;
+			if (*reached_map == 6)
+				(*reached_map) += flags;
 		}
 		else
-			flags++;
-		if (*reached_map == 6)
-			(*reached_map) += flags;
+			(*reached_map)++;
 		free(line);
 		line = get_next_line(fd);
 	}

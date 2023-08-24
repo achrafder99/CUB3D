@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 11:47:40 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/20 14:42:43 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/24 11:44:50 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # define TAILED 32
-
+# define FOV 1.0
 # include "./get_next_line/get_next_line.h"
 # include <fcntl.h>
 # include <mlx.h>
@@ -23,6 +23,15 @@
 # define DISPLAY_ERROR "The map must be closed/surrounded by walls\n"
 # define DISPLAY_ERROR1 "There are some elements missing\n"
 # define DISPLAY_ERROR2 "Color not valid; expected format (R-G-B)\n"
+
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img;
 
 typedef struct s_dd
 {
@@ -35,8 +44,12 @@ typedef struct s_dd
 
 typedef struct s_player
 {
-	int			x;
-	int			y;
+	float			x;
+	float			y;
+	float			rotation;
+	float			rotation_speed;
+	int				w_direction;
+	int				t_direction;
 }				t_player;
 
 typedef struct s_texture
@@ -80,6 +93,7 @@ typedef struct s_vars
 	t_data		*data;
 	t_player	player;
 	t_dd		d;
+	t_img 		img;
 }				t_vars;
 
 char			*ft_strchr(char *s, int c);
@@ -115,4 +129,6 @@ int				check_car(char *r, char *g, char *b);
 char			*ft_substr(char *s, unsigned int start, size_t len);
 int				ft_strcmp(const char *s1, const char *s2);
 char			*ft_strrchr(char *s, int c);
+void    		drawing(t_data *data);
+char			*ft_strtrim(char  *s1, char  *set);
 #endif

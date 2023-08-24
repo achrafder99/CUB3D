@@ -6,11 +6,24 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 20:30:46 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/20 12:36:35 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/23 12:21:10 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	check_digits(char *color)
+{	
+	int i;
+	i = 0;
+	while (color[i])
+	{
+		if (color[i] < 40 || color[i] > 57)
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 unsigned int	get_color(char *r, char *g, char *b)
 {
@@ -52,17 +65,16 @@ int	check_rgbs(t_ceiling ceiling, t_floor floor)
 
 int	check_color(char *color)
 {
-	int	i;
+	char	*trim;
+	int		i;
 
 	i = 0;
-	while (i < ft_strlen(color))
+	trim = ft_strtrim(color, " \n");
+	if (!check_digits(trim))
 	{
-		if (color[i] != '\n')
-		{
-			if (color[i] >= 'a' && color[i] <= 'z')
-				return (0);
-		}
-		i++;
+		free(trim);
+		return (0);
 	}
+	free(trim);
 	return (1);
 }

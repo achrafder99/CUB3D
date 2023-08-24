@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 12:23:34 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/20 14:41:49 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/23 16:37:23 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	open_file(char *filename)
 	char	*substr;
 
 	substr = ft_substr(filename, 0, ft_strlen(filename) - 1);
-	fd = open(substr, O_RDWR);
+	fd = open(substr, O_RDONLY);
 	free(substr);
 	return (fd);
 }
@@ -29,7 +29,7 @@ void	open_texture(char *n, char *s, char *w, char *e)
 	int	fd_s;
 	int	fd_w;
 	int	fd_e;
-
+		
 	fd_n = open_file(n);
 	fd_s = open_file(s);
 	fd_w = open_file(w);
@@ -105,6 +105,7 @@ int	main(int c, char**argv)
 	data->texture.ea);
 	if (!check_map(data->map_represent))
 		exit(1);
+	drawing(data);
 	free_data(data);
 	free_things(data->map_represent);
 }
