@@ -6,11 +6,11 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 21:51:47 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/13 22:38:23 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:48:06 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/parsing.h"
 
 void	fill(int fd, t_data *data, int count, char *start_map)
 {
@@ -25,6 +25,13 @@ void	fill(int fd, t_data *data, int count, char *start_map)
 		data->map_represent[i] = ft_strdup(line);
 		free(line);
 		i++;
+	}
+	if (ft_strchr(data->map_represent[count - 1], '\n'))
+	{
+		printf("error encountered\n");
+		free_data(data);
+		close(fd);
+		exit(1);
 	}
 	close(fd);
 	data->map_represent[i] = NULL;

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aalami <aalami@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 14:54:02 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/20 12:37:57 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:40:39 by aalami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../include/parsing.h"
 
 char	*ft_strdup(char *s1)
 {

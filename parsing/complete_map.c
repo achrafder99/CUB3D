@@ -6,11 +6,24 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:43:21 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/20 12:20:14 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/27 14:37:43 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/parsing.h"
+
+int	check_(char **map, int i, int j)
+{
+	if (map[i][j] == '0')
+	{
+		if (map[i][j + 1] == '.' || \
+		map[i][j - 1] == '.' || \
+		map[i + 1][j] == '.' || \
+		map[i - 1][j] == '.')
+			return (0);
+	}	
+	return (1);
+}
 
 int	check_line(char *line)
 {
@@ -69,6 +82,21 @@ void	complete_the_map(int longest_length, t_data *data)
 		{
 			perror("");
 			exit(1);
+		}
+		i++;
+	}
+	i = 0;
+	while (data->map_represent[i])
+	{
+		int j = 0;
+		while (data->map_represent[i][j] != '\0')
+		{
+			if (!check_(data->map_represent, i , j))
+			{
+				printf("map not valid\n");
+				exit(1);
+			}
+			j++;
 		}
 		i++;
 	}

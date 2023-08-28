@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aalami <aalami@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 11:47:40 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/24 11:44:50 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/24 15:08:20 by aalami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define TAILED 32
-# define FOV 1.0
-# include "./get_next_line/get_next_line.h"
+# include "../parsing/get_next_line/get_next_line.h"
 # include <fcntl.h>
 # include <mlx.h>
 # include <math.h>
@@ -24,41 +22,14 @@
 # define DISPLAY_ERROR1 "There are some elements missing\n"
 # define DISPLAY_ERROR2 "Color not valid; expected format (R-G-B)\n"
 
-typedef struct s_img
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_img;
 
-typedef struct s_dd
-{
-	void		*img_ptr;
-	int			bits_per_pixel;
-	int			size_line;
-	int			endian;
-	char		*img_data;
-}				t_dd;
-
-typedef struct s_player
-{
-	float			x;
-	float			y;
-	float			rotation;
-	float			rotation_speed;
-	int				w_direction;
-	int				t_direction;
-}				t_player;
-
-typedef struct s_texture
+typedef struct s_text
 {
 	char		*no;
 	char		*so;
 	char		*we;
 	char		*ea;
-}				t_texture;
+}				t_text;
 
 typedef struct s_floor
 {
@@ -80,7 +51,7 @@ typedef struct s_data
 {
 	t_ceiling	ceiling;
 	t_floor		floor;
-	t_texture	texture;
+	t_text		texture;
 	char		**map_represent;
 }				t_data;
 
@@ -91,9 +62,6 @@ typedef struct s_vars
 	int			width;
 	int			height;
 	t_data		*data;
-	t_player	player;
-	t_dd		d;
-	t_img 		img;
 }				t_vars;
 
 char			*ft_strchr(char *s, int c);
@@ -104,13 +72,12 @@ int				ft_atoi(const char *str);
 void			free_data(t_data *data);
 void			free_things(char **spliting);
 int				put_data(t_data *data, int fd, int *reached_map);
-void			parse_map(t_data *data, int reached_map);
+void			parse_map(t_data *data, int reached_map,char *path);
 int				parse_element(t_data *data);
 char			*get_begin(int reached_map, int fd);
 int				parse_element(t_data *data);
 void			put(char *line, t_data *data, char i);
 void			put_rgb(t_data *data, char *line, char identifier);
-void			parse_map(t_data *data, int reached_map);
 int				check_spaces(char *line);
 void			fill(int fd, t_data *data, int count, char *start_map);
 int				check_map(char **represent_map);
@@ -120,7 +87,6 @@ int				get_longest_length(char **represent_map);
 void			check_characters(char *line, int *w, int *e, int *o);
 int				get_columns(char **represent);
 int				get_rows(char **represent);
-void			start_drawing(t_data *data);
 unsigned int	get_color(char *r, char *g, char *b);
 void			colors(t_data *data);
 int				check_rgbs(t_ceiling ceiling, t_floor floor);
@@ -129,6 +95,7 @@ int				check_car(char *r, char *g, char *b);
 char			*ft_substr(char *s, unsigned int start, size_t len);
 int				ft_strcmp(const char *s1, const char *s2);
 char			*ft_strrchr(char *s, int c);
-void    		drawing(t_data *data);
 char			*ft_strtrim(char  *s1, char  *set);
+
+
 #endif

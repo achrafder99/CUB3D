@@ -6,22 +6,16 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:09:48 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/23 12:38:24 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:41:20 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/parsing.h"
 
 void	check_last_line(char **map_represent, int index_last)
 {
 	int	i;
 
-	if (ft_strchr(map_represent[index_last], '\n'))
-	{
-		printf("error encountered\n");
-		free_things(map_represent);
-		exit(1);
-	}
 	i = 0;
 	while (map_represent[index_last][i] != '\0')
 	{
@@ -99,6 +93,19 @@ int	get_index(char *line, int from)
 	return (i);
 }
 
+int	check_line_(char *line)
+{
+	int i;
+	i = 0;
+	while (i < ft_strlen(line) - 1)
+	{
+		if (line[i] != '.')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	check_map(char **represent_map)
 {
 	int	i;
@@ -123,6 +130,8 @@ int	check_map(char **represent_map)
 			|| represent_map[i][get_index(represent_map[i], 1)] != '1'))
 				return (printf(DISPLAY_ERROR), 0);
 		}
+		else if (!check_line_(represent_map[i]))
+			return (0);
 	}
 	check_last_line(represent_map, i - 1);
 	return (1);

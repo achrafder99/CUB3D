@@ -2,6 +2,7 @@
 static const char *ZWFnbGU_[] = {
 /* columns rows colors chars-per-pixel */
 "64 64 56 1 ",
+"  c #202020",
 ". c #2C2C2C",
 "X c gray19",
 "o c gray22",

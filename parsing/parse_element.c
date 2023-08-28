@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_element.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aalami <aalami@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 12:29:39 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/20 12:34:39 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/24 15:02:05 by aalami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/parsing.h"
 
 int	parse_element(t_data *data)
 {

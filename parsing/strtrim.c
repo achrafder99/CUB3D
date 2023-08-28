@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   strtrim.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aalami <aalami@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 11:11:21 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/23 11:19:16 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:40:38 by aalami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/parsing.h"
 
 static char	*no_occurence(void)
 {

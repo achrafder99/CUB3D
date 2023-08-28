@@ -6,11 +6,11 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:48:05 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/23 13:16:53 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/27 14:34:54 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/parsing.h"
 
 void	put_things(t_data *data, char	**spliting, int flags)
 {
@@ -33,15 +33,9 @@ void	put_things(t_data *data, char	**spliting, int flags)
 
 int	check_identifier(char *line)
 {	
-	static int flag;
 	char	**spliting;
 	spliting = ft_split(line, ' ');
-	if (flag < 6)
-	{
-		if (!spliting[0] || !spliting[1])
-			return (free_things(spliting), 0);
-	}
-	else if (spliting[0] != NULL && spliting[1] != NULL)
+	if (spliting[0] != NULL && spliting[1] != NULL)
 	{
 		if (spliting[0][0] == 'S' && spliting[0][1] != 'O' \
 		&& spliting[0][1] != '\0')
@@ -62,7 +56,6 @@ int	check_identifier(char *line)
 			return (free_things(spliting), 0);
 	}
 	free_things(spliting);
-	flag++;
 	return (1);
 }
 
@@ -124,24 +117,19 @@ int	put_data(t_data *data, int fd, int *reached_map)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		if (ft_strcmp(line, "\n"))
+		if (!check_identifier(line))
+			return (free(line), 0);
+		if (line[0] == 'N' || line[0] == 'S' \
+		|| line[0] == 'W' || line[0] == 'E' \
+		|| line[0] == 'F' || line[0] == 'C')
 		{
-			if (!check_identifier(line))
-				return (free(line), 0);
-			else if (line[0] == 'N' || line[0] == 'S' \
-			|| line[0] == 'W' || line[0] == 'E' \
-			|| line[0] == 'F' || line[0] == 'C')
-			{
-				put(line, data, line[0]);
-				(*reached_map)++;
-			}
-			else
-				flags++;
-			if (*reached_map == 6)
-				(*reached_map) += flags;
+			put(line, data, line[0]);
+			(*reached_map)++;
 		}
 		else
-			(*reached_map)++;
+			flags++;
+		if (*reached_map == 6)
+			(*reached_map) += flags;
 		free(line);
 		line = get_next_line(fd);
 	}

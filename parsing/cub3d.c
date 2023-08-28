@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aalami <aalami@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 11:48:08 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/20 14:35:57 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:57:29 by aalami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/parsing.h"
 
 int	check_spaces(char *line)
 {
@@ -76,7 +76,7 @@ void	fill_map(char *first_line, t_data *data, int count)
 	char	*line;
 	int		i;
 
-	fd = open("cub.cub", O_RDWR);
+	fd = open("", O_RDWR);
 	if (fd == -1)
 		return (perror(""), exit(1));
 	line = get_next_line(fd);

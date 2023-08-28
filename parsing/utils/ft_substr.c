@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aalami <aalami@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 21:02:32 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/20 12:37:10 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:40:39 by aalami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../include/parsing.h"
 
 char	*ft_substr(char *s, unsigned int start, size_t len)
 {
