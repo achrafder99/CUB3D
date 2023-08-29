@@ -6,15 +6,16 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 20:30:46 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/23 12:21:10 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/29 12:30:59 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/parsing.h"
 
 int	check_digits(char *color)
-{	
-	int i;
+{
+	int	i;
+
 	i = 0;
 	while (color[i])
 	{
@@ -23,11 +24,6 @@ int	check_digits(char *color)
 		i++;
 	}
 	return (1);
-}
-
-unsigned int	get_color(char *r, char *g, char *b)
-{
-	return (ft_atoi(r) << 16 | ft_atoi(g) << 8 | ft_atoi(b));
 }
 
 int	check_range(t_ceiling ceiling, t_floor floor)

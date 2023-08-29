@@ -6,11 +6,11 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 11:11:21 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/23 11:19:16 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/29 12:21:25 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/parsing.h"
 
 static char	*no_occurence(void)
 {
@@ -23,7 +23,7 @@ static char	*no_occurence(void)
 	return (new);
 }
 
-static int	start(char  *s1, char  *set)
+static int	start(char *s1, char *set)
 {
 	size_t	i;
 	size_t	j;

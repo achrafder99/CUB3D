@@ -6,11 +6,39 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:43:21 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/20 12:20:14 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/29 12:27:50 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/parsing.h"
+
+int	check_(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j] != '\0')
+		{
+			if (map[i][j] == '0' || map[i][j] == 'N' \
+			|| map[i][j] == 'S' \
+			|| map[i][j] == 'W' || map[i][j] == 'E')
+			{
+				if (map[i][j + 1] == '.' || \
+				map[i][j - 1] == '.' || \
+				map[i + 1][j] == '.' || \
+				map[i - 1][j] == '.')
+					return (0);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
 
 int	check_line(char *line)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aalami <aalami@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 14:37:22 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/20 14:38:41 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:40:39 by aalami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../include/parsing.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {

@@ -6,18 +6,18 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:48:32 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/23 12:40:45 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/27 14:37:36 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/parsing.h"
 
-void	fill_array_2d(t_data *data, int count, char *start_map)
+void	fill_array_2d(t_data *data, int count, char *start_map, char *path)
 {
 	char	*line;
 	int		fd;
 
-	fd = open("cub.cub", O_RDWR);
+	fd = open(path, O_RDWR);
 	if (fd == -1)
 	{
 		perror("");
@@ -75,7 +75,7 @@ int	check_spaces_line(char *line)
 	return (0);
 }
 
-void	parse_map(t_data *data, int reached_map)
+void	parse_map(t_data *data, int reached_map, char *path)
 {
 	char	*start_map;
 	int		last_map;
@@ -83,7 +83,7 @@ void	parse_map(t_data *data, int reached_map)
 	int		i;
 	int		count;
 
-	fd = open("cub.cub", O_RDWR, 0777);
+	fd = open(path, O_RDWR, 0777);
 	i = 0;
 	if (fd == -1)
 	{
@@ -96,9 +96,9 @@ void	parse_map(t_data *data, int reached_map)
 		printf("the map must be the last\n");
 		exit(1);
 	}
-	fd = open("cub.cub", O_RDWR);
+	fd = open(path, O_RDWR);
 	count = get_number_of_lines(start_map, fd);
 	close(fd);
-	fill_array_2d(data, count, start_map);
+	fill_array_2d(data, count, start_map, path);
 	free(start_map);
 }

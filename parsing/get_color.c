@@ -1,38 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill.c                                             :+:      :+:    :+:   */
+/*   get_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/13 21:51:47 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/28 15:48:06 by adardour         ###   ########.fr       */
+/*   Created: 2023/08/29 12:28:32 by adardour          #+#    #+#             */
+/*   Updated: 2023/08/29 12:30:15 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
-void	fill(int fd, t_data *data, int count, char *start_map)
+unsigned int	get_color(char *r, char *g, char *b)
 {
-	char	*line;
-	int		i;
-
-	data->map_represent[0] = ft_strdup(start_map);
-	i = 1;
-	while (i < count)
-	{
-		line = get_next_line(fd);
-		data->map_represent[i] = ft_strdup(line);
-		free(line);
-		i++;
-	}
-	if (ft_strchr(data->map_represent[count - 1], '\n'))
-	{
-		printf("error encountered\n");
-		free_data(data);
-		close(fd);
-		exit(1);
-	}
-	close(fd);
-	data->map_represent[i] = NULL;
+	return (ft_atoi(r) << 16 | ft_atoi(g) << 8 | ft_atoi(b));
 }
