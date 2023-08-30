@@ -9,7 +9,8 @@ SOURCES =  main.c ./execution/intersection.c ./execution/wall_render.c ./executi
 ./parsing/check_caracteres.c ./parsing/rows_and_columns.c ./parsing/colors.c  ./parsing/strtrim.c \
 ./handle_files/open.c \
 ./drawing.c ./parsing.c ./parsing/get_color.c \
-./check/check.c
+./check/check.c \
+./get_x_y.c
 
 OBJ = $(SOURCES:.c=.o)
 MLX_DIR = mlx

@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:48:05 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/29 12:27:22 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/29 20:10:43 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,17 @@ void	put(char *line, t_data *data, char i)
 
 	spliting = ft_split(line, ' ');
 	if (i == 'N')
-		data->texture.no = ft_strdup(spliting[1]);
+		data->texture.no = ft_substr(spliting[1], 0, \
+		ft_strlen(spliting[1]) - 1);
 	if (i == 'S')
-		data->texture.so = ft_strdup(spliting[1]);
+		data->texture.so = ft_substr(spliting[1], 0, \
+		ft_strlen(spliting[1]) - 1);
 	if (i == 'W')
-		data->texture.we = ft_strdup(spliting[1]);
+		data->texture.we = ft_substr(spliting[1], 0, \
+		ft_strlen(spliting[1]) - 1);
 	if (i == 'E')
-		data->texture.ea = ft_strdup(spliting[1]);
+		data->texture.ea = ft_substr(spliting[1], 0, \
+		ft_strlen(spliting[1]) - 1);
 	if (i == 'F')
 		put_rgb(data, line, 'F');
 	if (i == 'C')

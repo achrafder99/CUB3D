@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 20:30:46 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/29 12:30:59 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:37:49 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ void	colors(t_data *data)
 
 int	check_rgbs(t_ceiling ceiling, t_floor floor)
 {
+	if (!floor.r || !floor.g || !floor.b \
+	|| !ceiling.r || !ceiling.g \
+	|| !ceiling.b)
+		return (0);
 	if (check_car(ceiling.r, ceiling.g, ceiling.b) != 3 \
 	|| check_car(floor.r, floor.g, floor.b) != 3)
 		return (0);

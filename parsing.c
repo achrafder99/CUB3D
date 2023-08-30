@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 11:45:30 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/29 12:20:17 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:35:51 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@ int	parsing(char **argv, int reached_map, int fd, t_mlx *mlx)
 	open_texture(mlx->data->texture.no, \
 	mlx->data->texture.so, mlx->data->texture.we, \
 	mlx->data->texture.ea);
-	mlx->text_ure.ea = mlx->data->texture.ea;
-	mlx->text_ure.so = mlx->data->texture.so;
-	mlx->text_ure.no = mlx->data->texture.no;
-	mlx->text_ure.we = mlx->data->texture.we;
 	if (!check_map(mlx->data->map_represent) \
 	|| is_empty(mlx) || !check_(mlx->data->map_represent))
 	{

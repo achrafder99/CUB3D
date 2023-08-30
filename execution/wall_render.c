@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 22:10:27 by aalami            #+#    #+#             */
-/*   Updated: 2023/08/28 16:30:33 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/29 20:07:26 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void	draw_west_text(t_mlx *mlx, int wall_top, int wall_bot, int i)
 				/ mlx->rays[i].wall_height);
 		dst = mlx->text_w.img.data + (y_off * mlx->text_w.img.size + mlx->text_w.text_offset * 4);
 		color = *(unsigned int *)dst;
-		// color = mlx->text_w_arr[y_off * mlx->text_w.w
-		// 	+ mlx->text_w.text_offset];
 		my_mlx_pixel_put(mlx, i, wall_top, color);
 		wall_top += 1;
 		y++;
@@ -59,8 +57,6 @@ void	draw_east_text(t_mlx *mlx, int wall_top, int wall_bot, int i)
 				/ mlx->rays[i].wall_height);
 		dst = mlx->text_e.img.data + (y_off * mlx->text_e.img.size + mlx->text_e.text_offset * 4);
 		color = *(unsigned int *)dst;
-		// color = mlx->text_e_arr[y_off * mlx->text_e.w
-		// 	+ mlx->text_e.text_offset];
 		my_mlx_pixel_put(mlx, i, wall_top, color);
 		wall_top += 1;
 		y++;
@@ -111,8 +107,6 @@ void	draw_south_text(t_mlx *mlx, int wall_top, int wall_bot, int i)
 				/ mlx->rays[i].wall_height);
 		dst = mlx->text_s.img.data + (y_off * mlx->text_s.img.size + mlx->text_s.text_offset * 4);
 		color = *(unsigned int *)dst;
-		// color = mlx->text_s_arr[y_off * mlx->text_s.w
-		// 	+ mlx->text_s.text_offset];
 		my_mlx_pixel_put(mlx, i, wall_top, color);
 		wall_top += 1;
 		y++;

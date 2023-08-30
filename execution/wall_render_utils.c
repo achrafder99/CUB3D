@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_render_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalami <aalami@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 14:43:23 by aalami            #+#    #+#             */
-/*   Updated: 2023/08/24 14:45:14 by aalami           ###   ########.fr       */
+/*   Updated: 2023/08/30 12:49:50 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	render_walls(t_mlx *mlx)
 	i = 0;
 	while (i < mlx->win_w)
 	{
+		draw_project(mlx, i, 0, mlx->rays[i].top_wall, \
+		mlx->data->ceiling.color);
 		if (mlx->rays[i].hit_h)
 		{
 			if (mlx->rays[i].f_u)
@@ -33,6 +35,8 @@ void	render_walls(t_mlx *mlx)
 			else
 				draw_based_on_direction(mlx, i, 'w');
 		}
+		draw_project(mlx, i, mlx->rays[i].bot_wall, mlx->win_h, \
+		mlx->data->floor.color);
 		i++;
 	}
 }

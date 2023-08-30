@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 09:49:16 by aalami            #+#    #+#             */
-/*   Updated: 2023/08/29 13:17:07 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:51:29 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,13 @@ typedef struct s_texture
 	int			text_offset;
 }				t_texture;
 
+typedef struct t_axes
+{
+	float	x1;
+	float	y1;
+	float	y2;
+}	t_axes;
+
 typedef struct s_mlx
 {
 	void		*mlx_init;
@@ -88,6 +95,7 @@ typedef struct s_mlx
 	int			win_h;
 	int			win_w;
 	char		**map;
+	char		angle;
 	t_img		img;
 	t_img		m_map;
 	t_player	player;
@@ -102,6 +110,7 @@ typedef struct s_mlx
 	int			*text_w_arr;
 	t_data		*data;
 	t_text		text_ure;
+	t_axes		axes;
 }				t_mlx;
 
 typedef struct s_game
@@ -114,7 +123,6 @@ typedef struct s_game
 void	get_intersect_and_draw(t_mlx *mlx, int i);
 void	get_horizontal_intersect(t_mlx *mlx, int i);
 void	get_vertical_intersect(t_mlx *mlx, int i);
-void	draw_line(t_mlx *mlx, float angle, float x1, float y1);
 void	draw_ray_line(t_mlx *mlx, float x1, float y1, int j);
 void	render_projection(t_mlx *mlx);
 void	draw_project(t_mlx *mlx, float x1, float y1, float y2, int color);
@@ -151,5 +159,5 @@ int		render_map(t_mlx *mlx);
 int		parsing(char **argv, int reached_map, int fd, t_mlx *mlx);
 int		is_empty(t_mlx *mlx);
 void	init(t_data *data);
-
+void	get_player_pos(t_mlx *mlx);
 #endif

@@ -1,0 +1,10 @@
+{
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#10350E",
+        "titleBar.activeBackground": "#164A13",
+        "titleBar.activeForeground": "#F4FCF3"
+    },
+    "files.associations": {
+        "cub.h": "c"
+    }
+}

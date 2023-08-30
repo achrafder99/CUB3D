@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 11:42:05 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/29 12:07:48 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/29 20:27:08 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	handle_textures(t_mlx *mlx)
 {
 	mlx->text_n.img.img_ptr = mlx_xpm_file_to_image(mlx->mlx_init, \
-	"textures/eagle.xpm", &mlx->text_n.w, &mlx->text_n.h);
+	"./textures/eagle.xpm", &mlx->text_n.w, &mlx->text_n.h);
 	mlx->text_n.img.data = mlx_get_data_addr(mlx->text_n.img.img_ptr, \
 	&mlx->text_n.img.bpp, &mlx->text_n.img.size, &mlx->text_n.img.endian);
 	mlx->text_s.img.img_ptr = mlx_xpm_file_to_image(mlx->mlx_init, \
@@ -62,8 +62,6 @@ int	render_map(t_mlx *mlx)
 	cast_rays(mlx);
 	render_projection(mlx);
 	render_walls(mlx);
-	render_ceiling(mlx);
-	render_floor(mlx);
 	draw_map_img(mlx->map, mlx);
 	draw_player(mlx);
 	draw_rays(mlx);

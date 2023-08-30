@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:47:08 by aalami            #+#    #+#             */
-/*   Updated: 2023/08/28 21:30:19 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:50:56 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ void	draw_map_img(char **map, t_mlx *mlx)
 			y = 0;
 			if (map[i][j] == '1')
 				draw_minimap_elm(mlx, 1, i, j);
-			else if (map[i][j] == '0' || map[i][j] == 'N')
+			else if (map[i][j] == '0' \
+			|| map[i][j] == 'N' || map[i][j] == 'S' \
+			|| map[i][j] == 'E' || map[i][j] == 'W')
 				draw_minimap_elm(mlx, 0, i, j);
 			j++;
 		}
@@ -60,7 +62,6 @@ void	draw_map_img(char **map, t_mlx *mlx)
 
 int	draw_player(t_mlx *mlx)
 {
-	printf("%f    %f\n", mlx->player.x / TILE_SIZE, mlx->player.y / TILE_SIZE);
 	my_mlx_pixel_put(mlx, MAP_SCALE * mlx->player.x, MAP_SCALE * mlx->player.y,
 		0xF93308);
 	return (0);
