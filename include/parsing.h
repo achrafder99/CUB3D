@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 11:47:40 by adardour          #+#    #+#             */
-/*   Updated: 2023/09/01 18:16:19 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/01 18:37:07 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,4 +107,5 @@ void			check_last_line(char **map_represent, int index_last);
 int				put_data(t_data *data, int fd, int *reached_map);
 int				put_rgb(t_data *data, char *line, char identifier);
 int				put(char *line, t_data *data, char i);
+int				check_cub(char *path);
 #endif

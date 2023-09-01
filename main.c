@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:39:08 by aalami            #+#    #+#             */
-/*   Updated: 2023/09/01 18:02:59 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/01 18:35:31 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	main(int argc, char **argv)
 	int		fd;
 	int		reached_map;
 
-	if (argc != 2)
+	if (argc != 2 || !check_cub(argv[1]))
 		return (printf("Usage: ./program_name file_name\n"));
 	reached_map = 0;
 	fd = open(argv[1], O_RDWR, 0777);
