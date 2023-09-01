@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 11:47:40 by adardour          #+#    #+#             */
-/*   Updated: 2023/09/01 16:23:50 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/01 18:16:19 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,14 @@
 # define DISPLAY_ERROR "The map must be closed/surrounded by walls: "
 # define DISPLAY_ERROR1 "There are some elements missing: "
 # define DISPLAY_ERROR2 "Color not valid; expected format (R-G-B): "
+
+typedef struct t_help
+{
+	char	**spliting;
+	int		i;
+	int		j;
+	int		count;
+}	t_help;
 
 typedef struct s_text
 {

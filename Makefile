@@ -19,12 +19,10 @@ CFLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(OBJ) 
-	$(CC) $(OBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME) 
+	$(CC) ${CFLAGS} $(OBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME) 
 
-
-
-%.o: %.c ./include/cub.h 
-	$(CC)  -O3 -Imlx -c $< -o $@
+%.o: %.c ./include/cub.h  ./include/parsing.h 
+	$(CC) ${CFLAGS} -O3 -Imlx -c $< -o $@
 
 clean:
 	rm -f $(OBJ) 

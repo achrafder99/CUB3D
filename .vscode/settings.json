@@ -5,6 +5,11 @@
         "titleBar.activeForeground": "#F4FCF3"
     },
     "files.associations": {
-        "cub.h": "c"
+        "cub.h": "c",
+        "__bit_reference": "c",
+        "algorithm": "c",
+        "bitset": "c",
+        "chrono": "c",
+        "unordered_map": "c"
     }
 }

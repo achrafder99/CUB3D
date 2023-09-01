@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:47:08 by aalami            #+#    #+#             */
-/*   Updated: 2023/08/30 12:50:56 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/01 18:03:05 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	draw_minimap_elm(t_mlx *mlx, int elm, int i, int j)
 
 void	draw_map_img(char **map, t_mlx *mlx)
 {
-	float	x;
 	float	y;
 	int		i;
 	int		j;

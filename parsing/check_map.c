@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:09:48 by adardour          #+#    #+#             */
-/*   Updated: 2023/09/01 14:26:11 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/01 18:04:51 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ int	get_index(char *line, int from)
 	int	i;
 	int	length;
 
+	length = 0;
 	if (from == 0)
 	{
 		i = 0;
-		while (line[i] == '.' && line[i] != '\0')
+		while (line[i] != '\0' && line[i] == '.')
 			i++;
 	}
 	else
@@ -60,7 +61,7 @@ int	check_line_(char *line)
 	int	i;
 
 	i = 0;
-	while (i < ft_strlen(line))
+	while ((size_t)i < ft_strlen(line))
 	{
 		if (line[i] != '.')
 			return (1);

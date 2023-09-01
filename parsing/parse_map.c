@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:48:32 by adardour          #+#    #+#             */
-/*   Updated: 2023/09/01 16:22:31 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/01 18:04:06 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	check_spaces_line(char *line)
 	int	i;
 
 	i = 0;
-	while (i < ft_strlen(line) - 1)
+	while ((size_t)i < ft_strlen(line) - 1)
 	{
 		if (line[i] != ' ' && line[i] != '\t')
 			return (1);
@@ -77,7 +77,6 @@ int	check_spaces_line(char *line)
 int	parse_map(t_data *data, int reached_map, char *path)
 {
 	char	*start_map;
-	int		last_map;
 	int		fd;
 	int		i;
 	int		count;

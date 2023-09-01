@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:39:08 by aalami            #+#    #+#             */
-/*   Updated: 2023/09/01 16:18:33 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/01 18:02:59 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,9 @@ void	init(t_data *data)
 	data->map_represent = NULL;
 }
 
-void	fill_text_arr(t_mlx *mlx, t_texture *text, int *text_arr)
+void	fill_text_arr(t_texture *text, int *text_arr)
 {
 	char	*dst;
-	int		color;
 	int		i;
 	int		x;
 	int		y;
