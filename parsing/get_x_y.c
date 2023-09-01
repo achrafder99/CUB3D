@@ -6,11 +6,11 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:34:07 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/30 12:39:59 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/01 17:54:41 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/cub.h"
+#include "../include/cub.h"
 
 void	get_player_pos(t_mlx *mlx)
 {

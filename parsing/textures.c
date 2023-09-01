@@ -6,12 +6,12 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:11:44 by adardour          #+#    #+#             */
-/*   Updated: 2023/09/01 17:51:01 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/01 17:57:03 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/cub.h"
-#include "./include/parsing.h"
+#include "../include/cub.h"
+#include "../include/parsing.h"
 
 void	free_(t_mlx *mlx)
 {

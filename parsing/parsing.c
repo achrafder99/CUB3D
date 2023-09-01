@@ -6,12 +6,12 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 11:45:30 by adardour          #+#    #+#             */
-/*   Updated: 2023/09/01 16:18:42 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/01 17:53:45 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/cub.h"
-#include "./include/parsing.h"
+#include "../include/cub.h"
+#include "../include/parsing.h"
 
 int	parsing(char **argv, int reached_map, int fd, t_data *data)
 {
