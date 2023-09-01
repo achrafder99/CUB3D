@@ -6,32 +6,12 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 11:42:05 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/29 20:27:08 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/01 16:11:38 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/cub.h"
 #include "./include/parsing.h"
-
-void	handle_textures(t_mlx *mlx)
-{
-	mlx->text_n.img.img_ptr = mlx_xpm_file_to_image(mlx->mlx_init, \
-	"./textures/eagle.xpm", &mlx->text_n.w, &mlx->text_n.h);
-	mlx->text_n.img.data = mlx_get_data_addr(mlx->text_n.img.img_ptr, \
-	&mlx->text_n.img.bpp, &mlx->text_n.img.size, &mlx->text_n.img.endian);
-	mlx->text_s.img.img_ptr = mlx_xpm_file_to_image(mlx->mlx_init, \
-	"./textures/redbrick.xpm", &mlx->text_s.w, &mlx->text_s.h);
-	mlx->text_s.img.data = mlx_get_data_addr(mlx->text_s.img.img_ptr, \
-	&mlx->text_s.img.bpp, &mlx->text_s.img.size, &mlx->text_s.img.endian);
-	mlx->text_e.img.img_ptr = mlx_xpm_file_to_image(mlx->mlx_init, \
-	"./textures/eagle.xpm", &mlx->text_e.w, &mlx->text_e.h);
-	mlx->text_e.img.data = mlx_get_data_addr(mlx->text_e.img.img_ptr, \
-	&mlx->text_e.img.bpp, &mlx->text_e.img.size, &mlx->text_e.img.endian);
-	mlx->text_w.img.img_ptr = mlx_xpm_file_to_image(mlx->mlx_init, \
-	"./textures/eagle.xpm", &mlx->text_w.w, &mlx->text_w.h);
-	mlx->text_w.img.data = mlx_get_data_addr(mlx->text_w.img.img_ptr, \
-	&mlx->text_w.img.bpp, &mlx->text_w.img.size, &mlx->text_w.img.endian);
-}
 
 int	release(int key, t_mlx *mlx)
 {
@@ -61,7 +41,6 @@ int	render_map(t_mlx *mlx)
 	}
 	cast_rays(mlx);
 	render_projection(mlx);
-	render_walls(mlx);
 	draw_map_img(mlx->map, mlx);
 	draw_player(mlx);
 	draw_rays(mlx);
@@ -70,9 +49,15 @@ int	render_map(t_mlx *mlx)
 	return (0);
 }
 
-void	drawing(t_mlx *mlx, t_data *data)
+void	drawing(t_data *data)
 {
+	t_mlx	*mlx;
+
+	mlx = malloc(sizeof(t_mlx));
+	if (!mlx)
+		return (perror(""), exit(1));
 	mlx->data = data;
+	mlx->mlx_init = data->init;
 	mlx->map = data->map_represent;
 	init_player(mlx);
 	mlx->win_h = get_rows(data->map_represent) * TILE_SIZE;

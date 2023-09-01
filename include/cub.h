@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 09:49:16 by aalami            #+#    #+#             */
-/*   Updated: 2023/08/30 12:51:29 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/01 16:12:38 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 # include <math.h>
 # include <mlx.h>
-# include <string.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
 # include <unistd.h>
 # define TILE_SIZE 64
-# define MAP_SCALE 0.2
+# define MAP_SCALE 0.15
 # define PI 3.141592
 # define FOV 1.02
 # include "./parsing.h"
@@ -67,9 +67,9 @@ typedef struct s_player
 	float		x;
 	float		y;
 	int			turn_direction;
-	int			walk_direction; 
+	int			walk_direction;
 	float		rotat_angle;
-	float		mov_speed; 
+	float		mov_speed;
 	float		rot_speed;
 }				t_player;
 
@@ -83,10 +83,10 @@ typedef struct s_texture
 
 typedef struct t_axes
 {
-	float	x1;
-	float	y1;
-	float	y2;
-}	t_axes;
+	float		x1;
+	float		y1;
+	float		y2;
+}				t_axes;
 
 typedef struct s_mlx
 {
@@ -113,51 +113,47 @@ typedef struct s_mlx
 	t_axes		axes;
 }				t_mlx;
 
-typedef struct s_game
-{
-	t_mlx		*mlx;
-	char		**map;
-	t_player	player;
-}				t_game;
+void			get_intersect_and_draw(t_mlx *mlx, int i);
+void			get_horizontal_intersect(t_mlx *mlx, int i);
+void			get_vertical_intersect(t_mlx *mlx, int i);
+void			draw_ray_line(t_mlx *mlx, float x1, float y1, int j);
+void			render_projection(t_mlx *mlx);
+void			my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
+void			render_walls(t_mlx *mlx, int i);
+void			render_ceiling(t_mlx *mlx);
+void			render_floor(t_mlx *mlx);
+void			walk_player(t_mlx *mlx);
+int				rotate_player(t_mlx *mlx);
+int				check_wall(t_mlx *mlx);
+void			init_rays_dir(t_mlx *mlx);
+void			init_player(t_mlx *mlx);
+void			get_player_pos(t_mlx *mlx);
+int				move_player(int key, t_mlx *mlx);
+void			draw_rays(t_mlx *mlx);
+void			cast_rays(t_mlx *mlx);
+void			define_direction(t_mlx *mlx, int i);
+void			normalize_ray_angle(t_mlx *mlx, int i, float ray_angle);
+void			draw_map_img(char **map, t_mlx *mlx);
+void			draw_minimap_elm(t_mlx *mlx, int elm, int i, int j);
+int				draw_player(t_mlx *mlx);
+void			draw_pixels_line(t_mlx *mlx, float dx, float dy);
+int				is_boundries_hited(t_mlx *mlx, float x_inter, float y_inter);
+int				is_wall_hitted(t_mlx *mlx, float x_inter, float y_inter, int i);
+void			get_first_intersection(t_mlx *mlx, float *xi, float *yi, int i);
+void			save_distance(t_mlx *mlx, float xi, float yi, int i);
+void			draw_based_on_direction(t_mlx *mlx, int i, char dir);
+int				ft_exit(t_mlx *mlx);
+int				check_(char **map);
+void			drawing(t_data *data);
+int				release(int key, t_mlx *mlx);
+int				render_map(t_mlx *mlx);
+int				parsing(char **argv, int reached_map, int fd, t_data *data);
+void			init(t_data *data);
+void			get_player_pos(t_mlx *mlx);
+int				get_text_color(char *data, int x_off, int y_off, int s_l);
+void			draw_ceiling(t_mlx *mlx, float x1, float y1, float y2);
+void			draw_floor(t_mlx *mlx, float x1, float y1, float y2);
+void			free_data(t_data *data);
+void			handle_textures(t_mlx *mlx);
 
-void	get_intersect_and_draw(t_mlx *mlx, int i);
-void	get_horizontal_intersect(t_mlx *mlx, int i);
-void	get_vertical_intersect(t_mlx *mlx, int i);
-void	draw_ray_line(t_mlx *mlx, float x1, float y1, int j);
-void	render_projection(t_mlx *mlx);
-void	draw_project(t_mlx *mlx, float x1, float y1, float y2, int color);
-void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
-void	render_walls(t_mlx *mlx);
-void	render_ceiling(t_mlx *mlx);
-void	render_floor(t_mlx *mlx);
-void	walk_player(t_mlx *mlx);
-int		rotate_player(t_mlx *mlx);
-int		check_wall(t_mlx *mlx);
-void	init_rays_dir(t_mlx *mlx);
-void	init_player(t_mlx *mlx);
-void	get_player_pos(t_mlx *mlx);
-int		move_player(int key, t_mlx *mlx);
-void	draw_rays(t_mlx *mlx);
-void	cast_rays(t_mlx *mlx);
-void	define_direction(t_mlx *mlx, int i);
-void	normalize_ray_angle(t_mlx *mlx, int i, float ray_angle);
-void	draw_map_img(char **map, t_mlx *mlx);
-void	draw_minimap_elm(t_mlx *mlx, int elm, int i, int j);
-int		draw_player(t_mlx *mlx);
-void	draw_pixels_line(t_mlx *mlx, float dx, float dy);
-int		is_boundries_hited(t_mlx *mlx, float x_inter, float y_inter);
-int		is_wall_hitted(t_mlx *mlx, float x_inter, float y_inter, int i);
-void	get_first_intersection(t_mlx *mlx, float *xi, float *yi, int i);
-void	save_distance(t_mlx *mlx, float xi, float yi, int i);
-void	render_walls(t_mlx *mlx);
-void	draw_based_on_direction(t_mlx *mlx, int i, char dir);
-int		ft_exit(t_mlx *mlx);
-int		check_(char **map);
-void	drawing(t_mlx *mlx, t_data *data);
-int		release(int key, t_mlx *mlx);
-int		render_map(t_mlx *mlx);
-int		parsing(char **argv, int reached_map, int fd, t_mlx *mlx);
-int		is_empty(t_mlx *mlx);
-void	init(t_data *data);
-void	get_player_pos(t_mlx *mlx);
 #endif

@@ -3,42 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   wall_render_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aalami <aalami@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 14:43:23 by aalami            #+#    #+#             */
-/*   Updated: 2023/08/30 12:49:50 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:13:04 by aalami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub.h"
 
-void	render_walls(t_mlx *mlx)
+void	render_walls(t_mlx *mlx, int i)
 {
-	int	i;
-
-	i = 0;
-	while (i < mlx->win_w)
+	draw_ceiling(mlx, i, 0, mlx->rays[i].top_wall);
+	if (mlx->rays[i].hit_h)
 	{
-		draw_project(mlx, i, 0, mlx->rays[i].top_wall, \
-		mlx->data->ceiling.color);
-		if (mlx->rays[i].hit_h)
-		{
-			if (mlx->rays[i].f_u)
-				draw_based_on_direction(mlx, i, 'n');
-			else
-				draw_based_on_direction(mlx, i, 's');
-		}
+		if (mlx->rays[i].f_u)
+			draw_based_on_direction(mlx, i, 'n');
 		else
-		{
-			if (mlx->rays[i].f_r)
-				draw_based_on_direction(mlx, i, 'e');
-			else
-				draw_based_on_direction(mlx, i, 'w');
-		}
-		draw_project(mlx, i, mlx->rays[i].bot_wall, mlx->win_h, \
-		mlx->data->floor.color);
-		i++;
+			draw_based_on_direction(mlx, i, 's');
 	}
+	else
+	{
+		if (mlx->rays[i].f_r)
+			draw_based_on_direction(mlx, i, 'e');
+		else
+			draw_based_on_direction(mlx, i, 'w');
+	}
+	draw_floor(mlx, i, mlx->rays[i].bot_wall, mlx->win_h);
 }
 
 void	render_projection(t_mlx *mlx)
@@ -62,6 +53,7 @@ void	render_projection(t_mlx *mlx)
 			mlx->rays[i].top_wall = 0;
 		if (mlx->rays[i].bot_wall > mlx->win_h)
 			mlx->rays[i].bot_wall = mlx->win_h;
+		render_walls(mlx, i);
 		i++;
 	}
 }

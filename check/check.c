@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 11:48:46 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/29 20:23:54 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/01 16:20:16 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,40 +70,4 @@ int	check_wall(t_mlx *mlx)
 			return (0);
 	}
 	return (1);
-}
-
-int	check_path(char *path, t_mlx *mlx)
-{
-	int		w;
-	int		h;
-	void	*img;
-
-	img = mlx_xpm_file_to_image(mlx->mlx_init, path, &w, &h);
-	if (!img)
-		return (0);
-	return (1);
-}
-
-int	is_empty(t_mlx *mlx)
-{
-	char	*path;
-	int		i;
-
-	i = -1;
-	while (++i < 4)
-	{
-		if (i == 0)
-			path = mlx->data->texture.ea;
-		else if (i == 1)
-			path = mlx->data->texture.so;
-		else if (i == 2)
-			path = mlx->data->texture.no;
-		else if (i == 3)
-			path = mlx->data->texture.we;
-		if (!check_path(path, mlx))
-			return (free(path), 1);
-		else
-			free(path);
-	}
-	return (0);
 }

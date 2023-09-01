@@ -6,13 +6,13 @@
 /*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 21:51:47 by adardour          #+#    #+#             */
-/*   Updated: 2023/08/28 15:48:06 by adardour         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:08:38 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
-void	fill(int fd, t_data *data, int count, char *start_map)
+int	fill(int fd, t_data *data, int count, char *start_map)
 {
 	char	*line;
 	int		i;
@@ -29,10 +29,10 @@ void	fill(int fd, t_data *data, int count, char *start_map)
 	if (ft_strchr(data->map_represent[count - 1], '\n'))
 	{
 		printf("error encountered\n");
-		free_data(data);
 		close(fd);
-		exit(1);
+		return (0);
 	}
 	close(fd);
 	data->map_represent[i] = NULL;
+	return (1);
 }
