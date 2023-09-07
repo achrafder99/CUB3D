@@ -145,8 +145,42 @@ void	put_celing_floor(char *line,char *identifier,t_data *data)
     }
 }
 
+int	just_check(char *color)
+{
+	int i;
+	i = 0;
+	while (color[i])
+	{
+		if (color[i] < 48 || color[i] > 57)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	put_rgb(t_data *data, char *line, char *identifier)
 {
+	int i;
+	i = 0;
+	char **spliting;
+	char *str;
+	
+	str = ft_strchr(line, identifier[0]) + 1;
+	while (str[i] && str[i] == ' ')
+	i++;
+	i = 0;
+	spliting = ft_split(str, ',');
+	while (spliting[i])
+	{
+		char *trim;
+		trim = ft_strtrim(spliting[i]," \n");
+		if (!just_check(trim))
+			return (0);
+		free(trim);
+		i++;
+	}
+	if (i != 3)
+		return (0);
 	put_celing_floor(line, identifier, data);
 	return (1);
 }
