@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:39:08 by aalami            #+#    #+#             */
-/*   Updated: 2023/09/07 20:40:12 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/07 20:49:23 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,6 @@ void	fill_text_arr(t_texture *text, int *text_arr)
 	}
 }
 
-void	free_map(t_mlx *mlx)
-{
-	int	i;
-	int	j;
-	int	h;
-
-	i = 0;
-	j = 0;
-	h = get_rows(mlx->map);
-	while (mlx->data->map_represent)
-	{
-		free(mlx->data->map_represent[i]);
-		i++;
-	}
-	// free(mlx->map);
-}
-
 int	ft_exit(t_mlx *mlx)
 {
 	free(mlx->rays);
@@ -79,18 +62,12 @@ int	ft_exit(t_mlx *mlx)
 	exit (0);
 }
 
-void	v()
-{
-	system("leaks cub3d");
-}
-
 int	main(int argc, char **argv)
 {
 	t_data	*data;
 	int		fd;
 	int		reached_map;
 
-	atexit(v);
 	if (argc != 2 || !check_cub(argv[1]))
 		return (printf("Usage: ./program_name file_name\n"));
 	reached_map = 0;
