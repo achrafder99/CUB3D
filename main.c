@@ -88,6 +88,7 @@ int	main(int argc, char **argv)
 	int		fd;
 	int		reached_map;
 
+	atexit(a);
 	if (argc != 2 || !check_cub(argv[1]))
 		return (printf("Usage: ./program_name file_name\n"));
 	reached_map = 0;

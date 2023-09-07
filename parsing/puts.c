@@ -143,6 +143,7 @@ void	put_celing_floor(char *line,char *identifier,t_data *data)
 		}
 		i++;
     }
+	free_things(spliting);
 }
 
 int	just_check(char *color)
@@ -161,24 +162,25 @@ int	just_check(char *color)
 int	put_rgb(t_data *data, char *line, char *identifier)
 {
 	int i;
-	i = 0;
 	char **spliting;
 	char *str;
+	char *trim;
 	
+	i = 0;
 	str = ft_strchr(line, identifier[0]) + 1;
 	while (str[i] && str[i] == ' ')
-	i++;
+		i++;
 	i = 0;
 	spliting = ft_split(str, ',');
 	while (spliting[i])
 	{
-		char *trim;
 		trim = ft_strtrim(spliting[i]," \n");
 		if (!just_check(trim))
 			return (0);
 		free(trim);
 		i++;
 	}
+	free_things(spliting);
 	if (i != 3)
 		return (0);
 	put_celing_floor(line, identifier, data);
@@ -212,6 +214,7 @@ int	put_data(t_data *data, int fd, int *reached_map)
 			(*reached_map)++;
 		}
 		free(line);
+		free_things(spliting);
 		line = get_next_line(fd);
 	}
 	if (*reached_map < 6)
