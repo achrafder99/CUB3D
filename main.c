@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalami <aalami@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:39:08 by aalami            #+#    #+#             */
-/*   Updated: 2023/09/05 12:29:42 by aalami           ###   ########.fr       */
+/*   Updated: 2023/09/07 20:40:12 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,34 +61,36 @@ void	free_map(t_mlx *mlx)
 	i = 0;
 	j = 0;
 	h = get_rows(mlx->map);
-	while (i < h)
+	while (mlx->data->map_represent)
 	{
-		free(mlx->map[i]);
+		free(mlx->data->map_represent[i]);
 		i++;
 	}
-	free(mlx->map);
+	// free(mlx->map);
 }
 
 int	ft_exit(t_mlx *mlx)
 {
 	free(mlx->rays);
-	free_map(mlx);
+	free_things(mlx->data->map_represent);
 	free_data(mlx->data);
 	mlx_destroy_window(mlx->mlx_init, mlx->mlx_win);
 	free(mlx);
 	exit (0);
 }
-void	a()
+
+void	v()
 {
 	system("leaks cub3d");
 }
+
 int	main(int argc, char **argv)
 {
 	t_data	*data;
 	int		fd;
 	int		reached_map;
 
-	atexit(a);
+	atexit(v);
 	if (argc != 2 || !check_cub(argv[1]))
 		return (printf("Usage: ./program_name file_name\n"));
 	reached_map = 0;

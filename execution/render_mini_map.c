@@ -41,15 +41,14 @@ void	draw_map_img(char **map, t_mlx *mlx)
 	int		h;
 	int		w;
 
-	i = 0;
+	i = -1;
 	j = 0;
 	h = get_rows(map);
 	w = get_columns(map);
-
-	while (i < h )
+	while (++i < h)
 	{
 		j = 0;
-		while (j < w )
+		while (j < w)
 		{
 			y = 0;
 			if (map[i][j] == '1')
@@ -60,7 +59,6 @@ void	draw_map_img(char **map, t_mlx *mlx)
 				draw_minimap_elm(mlx, 0, i, j);
 			j++;
 		}
-		i++;
 	}
 }
 

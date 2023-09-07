@@ -64,7 +64,6 @@ void	drawing(t_data *data)
 	init_player(mlx);
 	mlx->win_h = 830;
 	mlx->win_w = 1850;
-	printf("%d %d\n", mlx->win_h, mlx->win_w);
 	mlx->rays = (t_ray *)malloc(sizeof(t_ray) * mlx->win_w);
 	mlx->mlx_win = mlx_new_window(mlx->mlx_init, \
 	mlx->win_w, mlx->win_h, "cub3d");

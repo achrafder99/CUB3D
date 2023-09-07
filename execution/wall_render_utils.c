@@ -40,7 +40,6 @@ void	render_projection(t_mlx *mlx)
 
 	i = 0;
 	proj_dis = (mlx->win_w / 2) / (tan(FOV / 2));
-	
 	while (i < mlx->win_w)
 	{
 		correct_dis = cos(mlx->player.rotat_angle - mlx->rays[i].ray_angle)

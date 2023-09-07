@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:48:32 by adardour          #+#    #+#             */
-/*   Updated: 2023/09/01 18:04:06 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/07 20:45:30 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,24 +39,32 @@ int	fill_array_2d(t_data *data, int count, char *start_map, char *path)
 	return (1);
 }
 
-int	get_number_of_lines(char *start, int fd)
+int	get_number_of_lines(char *start, char *path)
 {
+	int		fd;
 	int		count;
 	char	*line;
 
+	count = 0;
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		exit(1);
 	line = get_next_line(fd);
-	while (ft_strcmp(start, line))
+	while (line && ft_strcmp(line, start))
 	{
 		free(line);
 		line = get_next_line(fd);
 	}
-	count = 0;
+	free(line);
+	line = get_next_line(fd);
 	while (line)
 	{
+		count++;
 		free(line);
 		line = get_next_line(fd);
-		count++;
 	}
+	free(line);
+	close(fd);
 	return (count);
 }
 
@@ -76,23 +84,23 @@ int	check_spaces_line(char *line)
 
 int	parse_map(t_data *data, int reached_map, char *path)
 {
-	int fd;
-	char *line;
+	int		fd;
+	char	*line;
 	char	*start_map;
 	int		count;
+
 	fd = open(path, O_RDWR, 0777);
 	if (fd == -1)
 		exit(1);
-	start_map = ft_strdup(data->start_map);
-	if (start_map == NULL)
+	line = get_next_line(fd);
+	while (line)
 	{
-		printf("the map must be the last\n");
-		exit(1);
+		free(line);
+		line = get_next_line(fd);
 	}
-	count = get_number_of_lines(start_map, fd);
+	count = get_number_of_lines(data->start_map, path) + 1;
 	close(fd);
-	if (fill_array_2d(data, count, start_map, path))
+	if (fill_array_2d(data, count, data->start_map, path))
 		return (0);
-	free(start_map);
 	return (1);
 }
