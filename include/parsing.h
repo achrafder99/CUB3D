@@ -61,6 +61,7 @@ typedef struct s_data
 	t_text		texture;
 	char		**map_represent;
 	void		*init;
+	char		*start_map;
 }				t_data;
 
 typedef struct s_vars
@@ -105,7 +106,7 @@ void			open_texture(char *n, char *s, char *w, char *e);
 unsigned int	get_color(char *r, char *g, char *b);
 void			check_last_line(char **map_represent, int index_last);
 int				put_data(t_data *data, int fd, int *reached_map);
-int				put_rgb(t_data *data, char *line, char identifier);
-int				put(char *line, t_data *data, char i);
+int				put_rgb(t_data *data, char *line, char *identifier);
+int				put(char *line, t_data *data);
 int				check_cub(char *path);
 #endif

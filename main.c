@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aalami <aalami@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:39:08 by aalami            #+#    #+#             */
-/*   Updated: 2023/09/01 18:35:31 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/05 12:29:42 by aalami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,12 @@ void	free_map(t_mlx *mlx)
 {
 	int	i;
 	int	j;
+	int	h;
 
 	i = 0;
 	j = 0;
-	while (i < mlx->win_h / TILE_SIZE)
+	h = get_rows(mlx->map);
+	while (i < h)
 	{
 		free(mlx->map[i]);
 		i++;
@@ -75,9 +77,11 @@ int	ft_exit(t_mlx *mlx)
 	mlx_destroy_window(mlx->mlx_init, mlx->mlx_win);
 	free(mlx);
 	exit (0);
-	return (0);
 }
-
+void	a()
+{
+	system("leaks cub3d");
+}
 int	main(int argc, char **argv)
 {
 	t_data	*data;

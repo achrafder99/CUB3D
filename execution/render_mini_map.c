@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_mini_map.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aalami <aalami@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:47:08 by aalami            #+#    #+#             */
-/*   Updated: 2023/09/01 18:03:05 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/05 21:58:47 by aalami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,18 @@ void	draw_map_img(char **map, t_mlx *mlx)
 	float	y;
 	int		i;
 	int		j;
+	int		h;
+	int		w;
 
 	i = 0;
 	j = 0;
-	while (i < mlx->win_h / TILE_SIZE)
+	h = get_rows(map);
+	w = get_columns(map);
+
+	while (i < h )
 	{
 		j = 0;
-		while (j < mlx->win_w / TILE_SIZE)
+		while (j < w )
 		{
 			y = 0;
 			if (map[i][j] == '1')

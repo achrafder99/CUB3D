@@ -46,31 +46,26 @@ void	east(t_data *data, char **spliting)
 	ft_strlen(spliting[1]) - 1);
 }
 
-int	put(char *line, t_data *data, char i)
+int	check_indentifier(char *identifier)
+{
+	return (!ft_strcmp(identifier, "NO") || !ft_strcmp(identifier, "SO") || 
+	!ft_strcmp(identifier, "WE") || !ft_strcmp(identifier, "EA"));
+}
+
+int	put(char *line, t_data *data)
 {
 	static int	flags;
 	char		**spliting;
 
 	spliting = ft_split(line, ' ');
-	flags++;
-	if (flags > 6)
-	{
-		free_things(spliting);
-		return (0);
-	}
-	north_south_west(data, spliting, i);
-	if (i == 'E')
-		east(data, spliting);
-	if (i == 'F' && put_rgb(data, line, 'F') == 0)
-	{
-		free_things(spliting);
-		return (0);
-	}
-	if (i == 'C' && put_rgb(data, line, 'C') == 0)
-	{
-		free_things(spliting);
-		return (0);
-	}
+	if (!ft_strcmp(spliting[0], "SO"))
+		data->texture.so = ft_substr(spliting[1],0 , ft_strlen(spliting[1]) - 1);
+	else if (!ft_strcmp(spliting[0], "NO"))
+		data->texture.no = ft_substr(spliting[1],0 , ft_strlen(spliting[1]) - 1);
+	else if (!ft_strcmp(spliting[0], "WE"))
+		data->texture.we = ft_substr(spliting[1],0 , ft_strlen(spliting[1]) - 1);
+	else if (!ft_strcmp(spliting[0], "EA"))
+		data->texture.ea = ft_substr(spliting[1],0 , ft_strlen(spliting[1]) - 1);
 	free_things(spliting);
 	return (1);
 }

@@ -76,22 +76,19 @@ int	check_spaces_line(char *line)
 
 int	parse_map(t_data *data, int reached_map, char *path)
 {
+	int fd;
+	char *line;
 	char	*start_map;
-	int		fd;
-	int		i;
 	int		count;
-
 	fd = open(path, O_RDWR, 0777);
-	i = 0;
 	if (fd == -1)
 		exit(1);
-	start_map = get_begin(reached_map, fd);
+	start_map = ft_strdup(data->start_map);
 	if (start_map == NULL)
 	{
 		printf("the map must be the last\n");
 		exit(1);
 	}
-	fd = open(path, O_RDWR);
 	count = get_number_of_lines(start_map, fd);
 	close(fd);
 	if (fill_array_2d(data, count, start_map, path))

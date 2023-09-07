@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aalami <aalami@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 09:49:16 by aalami            #+#    #+#             */
-/*   Updated: 2023/09/01 16:12:38 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/05 18:26:31 by aalami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@
 # define MAP_SCALE 0.15
 # define PI 3.141592
 # define FOV 1.02
+# define ARR_LEFT 123
+# define ARR_RIGHT 124
+# define KEY_UP 13
+# define KEY_DOWN 1
+# define KEY_RIGHT 2
+# define KEY_LEFT 0
+# define KEY_EXIT 53
 # include "./parsing.h"
 
 typedef struct s_ray
@@ -67,7 +74,8 @@ typedef struct s_player
 	float		x;
 	float		y;
 	int			turn_direction;
-	int			walk_direction;
+	int			walk_ud;
+	int			walk_rl;
 	float		rotat_angle;
 	float		mov_speed;
 	float		rot_speed;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aalami <aalami@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 11:42:05 by adardour          #+#    #+#             */
-/*   Updated: 2023/09/01 16:11:38 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/05 20:42:42 by aalami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 
 int	release(int key, t_mlx *mlx)
 {
-	if (key == 13 || key == 1)
-		mlx->player.walk_direction = 0;
-	if (key == 123 || key == 124)
+	if (key == KEY_UP || key == KEY_DOWN)
+		mlx->player.walk_ud = 0;
+	if (key == KEY_RIGHT || key == KEY_LEFT)
+		mlx->player.walk_rl = 0;
+	if (key == ARR_LEFT || key == ARR_RIGHT)
 		mlx->player.turn_direction = 0;
 	return (0);
 }
@@ -36,7 +38,7 @@ int	render_map(t_mlx *mlx)
 	{
 		if (mlx->player.turn_direction != 0)
 			rotate_player(mlx);
-		if (mlx->player.walk_direction != 0)
+		if (mlx->player.walk_ud != 0 || mlx->player.walk_rl != 0)
 			walk_player(mlx);
 	}
 	cast_rays(mlx);
@@ -60,8 +62,9 @@ void	drawing(t_data *data)
 	mlx->mlx_init = data->init;
 	mlx->map = data->map_represent;
 	init_player(mlx);
-	mlx->win_h = get_rows(data->map_represent) * TILE_SIZE;
-	mlx->win_w = get_columns(data->map_represent) * TILE_SIZE;
+	mlx->win_h = 830;
+	mlx->win_w = 1850;
+	printf("%d %d\n", mlx->win_h, mlx->win_w);
 	mlx->rays = (t_ray *)malloc(sizeof(t_ray) * mlx->win_w);
 	mlx->mlx_win = mlx_new_window(mlx->mlx_init, \
 	mlx->win_w, mlx->win_h, "cub3d");

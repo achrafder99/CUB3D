@@ -13,13 +13,61 @@
 #include "../include/cub.h"
 #include "../include/parsing.h"
 
+int validate_element(char **argv, int reached_map,t_data *data)
+{
+	char	*line;
+	int		fd;
+	static int flags;
+
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+	{
+		perror("");
+		return (0);
+	}
+	line = get_next_line(fd);
+	int i;
+	i = 0;
+	char **spliting;
+	while (line != NULL && i < reached_map)
+	{
+		if (ft_strcmp(line, "\n"))
+		{
+			spliting = ft_split(line, ' ');
+			if (ft_strcmp(spliting[0], "NO") &&
+			ft_strcmp(spliting[0], "SO") &&
+			ft_strcmp(spliting[0], "WE") &&
+			ft_strcmp(spliting[0], "EA") && 
+			ft_strcmp(spliting[0], "C") &&
+			ft_strcmp(spliting[0], "F"))
+			{
+				free(line);
+				free_things(spliting);
+				return (0);
+			}
+			else 
+				flags++;
+		}
+		i++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	if (flags > 6)
+		return (0);
+	data->start_map = ft_strdup(line);
+	return (1);
+}
+
 int	parsing(char **argv, int reached_map, int fd, t_data *data)
 {
-	if (!put_data(data, fd, &reached_map) || reached_map < 6)
+	if (!put_data(data, fd, &reached_map))
 	{
 		printf(DISPLAY_ERROR1);
+		close(fd);
 		exit (1);
 	}
+	else if (!validate_element(argv, reached_map, data))
+		return (1);
 	else if (!check_rgbs(data->ceiling, data->floor))
 		return (printf(DISPLAY_ERROR2), 1);
 	parse_map(data, reached_map, argv[1]);
