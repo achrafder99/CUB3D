@@ -54,7 +54,10 @@ int validate_element(char **argv, int reached_map,t_data *data)
 		line = get_next_line(fd);
 	}
 	if (flags > 6)
+	{
+		free(line);
 		return (0);
+	}
 	data->start_map = ft_strdup(line);
 	free(line);
 	return (1);
@@ -69,10 +72,7 @@ int	parsing(char **argv, int reached_map, int fd, t_data *data)
 		exit (1);
 	}
 	else if (!validate_element(argv, reached_map, data))
-	{
-		close(fd);
-		exit (1);
-	}
+		return (1);
 	else if (!check_rgbs(data->ceiling, data->floor))
 		return (printf(DISPLAY_ERROR2), 1);
 	parse_map(data, reached_map, argv[1]);
