@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:48:05 by adardour          #+#    #+#             */
-/*   Updated: 2023/09/07 20:10:20 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:08:45 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,11 @@ int	just_check(char *color)
 	int	i;
 
 	i = 0;
+	while (color[i] && color[i] != ' ')
+		i++;	
 	while (color[i])
 	{
-		if (color[i] < 48 || color[i] > 57)
+		if (color[i] != ' ' || color[i] < 48 || color[i] > 57)
 			return (0);
 		i++;
 	}
@@ -84,7 +86,7 @@ int	put_rgb(t_data *data, char *line, char *identifier, int *reached_map)
 	str = ft_strchr(line, identifier[0]) + 1;
 	while (str[i] && str[i] == ' ')
 		i++;
-	i = 0;
+	i = -1;
 	spliting = ft_split(str, ',');
 	while (spliting[++i])
 	{
@@ -120,7 +122,10 @@ int	put_data(t_data *data, int fd, int *reached_map)
 			(*reached_map)++;
 		else if (!ft_strcmp(spliting[0], "F") || \
 		!ft_strcmp(spliting[0], "C"))
-			put_rgb(data, line, spliting[0], reached_map);
+		{
+			if (!put_rgb(data, line, spliting[0], reached_map))
+				return (0);
+		}
 		free(line);
 		free_things(spliting);
 		line = get_next_line(fd);

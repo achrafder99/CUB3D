@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 14:03:03 by adardour          #+#    #+#             */
-/*   Updated: 2023/09/01 18:18:42 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/08 14:55:53 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	get_length(char *line, int del)
 	return (i);
 }
 
-int	get_count(char *line, int del)
+int	get_count(char *line, char del)
 {
 	int	i;
 	int	size;
