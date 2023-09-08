@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 17:35:02 by adardour          #+#    #+#             */
-/*   Updated: 2023/09/01 14:32:36 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/08 14:22:29 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	free_data(t_data *data)
 	free(data->floor.r);
 	free(data->floor.g);
 	free(data->floor.b);
+	free(data->start_map);
 	free(data);
 }
 

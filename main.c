@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:39:08 by aalami            #+#    #+#             */
-/*   Updated: 2023/09/08 14:18:50 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/08 14:22:04 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,18 @@ int	ft_exit(t_mlx *mlx)
 	exit (0);
 }
 
+void	v()
+{
+	system("leaks cub3d");
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	*data;
 	int		fd;
 	int		reached_map;
 
+	atexit(v);
 	if (argc != 2 || !check_cub(argv[1]))
 		return (printf("Usage: ./program_name file_name\n"));
 	reached_map = 0;
