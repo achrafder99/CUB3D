@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 11:45:30 by adardour          #+#    #+#             */
-/*   Updated: 2023/09/08 16:06:54 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:41:53 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,21 +72,21 @@ int	parsing(char **argv, int reached_map, int fd, t_data *data)
 		close(fd);
 		exit (1);
 	}
-	// else if (!validate_element(argv, reached_map, data))
-	// 	return (1);
-	// else if (!check_rgbs(data->ceiling, data->floor))
-	// 	return (printf(DISPLAY_ERROR2), 1);
-	// else if (!parse_map(data, reached_map, argv[1]))
-	// 	return (1);
-	// else if (!check_symbols(data->map_represent))
-	// 	return (1);
-	// else if (!colors(data))
-	// 	return (printf("error\n"), 1);
-	// complete_the_map(get_longest_length(data->map_represent), data);
-	// open_texture(data->texture.no, \
-	// data->texture.so, data->texture.we, \
-	// data->texture.ea);
-	// if (!check_map(data->map_represent) || !check_(data->map_represent))
-	// 	return ((void)free_things(data->map_represent), free_data(data), 1);
+	else if (!validate_element(argv, reached_map, data))
+		return (1);
+	else if (!check_rgbs(data->ceiling, data->floor))
+		return (printf(DISPLAY_ERROR2), 1);
+	else if (!parse_map(data, reached_map, argv[1]))
+		return (1);
+	else if (!check_symbols(data->map_represent))
+		return (1);
+	else if (!colors(data))
+		return (printf("error\n"), 1);
+	complete_the_map(get_longest_length(data->map_represent), data);
+	open_texture(data->texture.no, \
+	data->texture.so, data->texture.we, \
+	data->texture.ea);
+	if (!check_map(data->map_represent) || !check_(data->map_represent))
+		return ((void)free_things(data->map_represent), free_data(data), 1);
 	return (0);
 }

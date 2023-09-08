@@ -9,6 +9,7 @@ SOURCES =  main.c ./execution/intersection.c ./execution/wall_render.c ./executi
 ./parsing/check_caracteres.c ./parsing/rows_and_columns.c ./parsing/colors.c  ./parsing/strtrim.c \
 ./handle_files/open.c \
 ./drawing.c ./parsing/parsing.c ./parsing/get_color.c ./parsing/put.c ./parsing/get_x_y.c ./parsing/textures.c ./parsing/check_cub.c ./parsing/put_color.c  \
+./parsing/check_last.c \
 ./check/check.c \
 
 OBJ = $(SOURCES:.c=.o)

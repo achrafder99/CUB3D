@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:39:08 by aalami            #+#    #+#             */
-/*   Updated: 2023/09/08 16:06:50 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:41:08 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,15 @@ int	main(int argc, char **argv)
 		return (printf("Error opening file\n"));
 	data = malloc(sizeof(t_data));
 	if (!data)
-	{
-		perror("");
-		return (1);
-	}
+		return (perror(""), 1);
 	init(data); 
-	if (parsing(argv, reached_map, fd, data))
+	if (!check_last(argv[1]) || \
+	parsing(argv, reached_map, fd, data) || reached_map < 6)
 	{
 		printf("error parsing\n");
 		exit (1);
 	}
 	data->init = mlx_init();
-	// drawing(data);
+	drawing(data);
 	return (0);
 }

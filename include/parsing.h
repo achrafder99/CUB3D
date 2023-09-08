@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 11:47:40 by adardour          #+#    #+#             */
-/*   Updated: 2023/09/07 20:11:44 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/08 17:40:32 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,4 +114,5 @@ int				put(char *line, t_data *data, int *reached_map);
 int				check_cub(char *path);
 void			put_color(char *color, int flag, \
 char *identifier, t_data *data);
+int				check_last(char *path);
 #endif
