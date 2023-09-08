@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:48:32 by adardour          #+#    #+#             */
-/*   Updated: 2023/09/07 20:45:30 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/08 14:19:29 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ int	parse_map(t_data *data, int reached_map, char *path)
 		free(line);
 		line = get_next_line(fd);
 	}
-	count = get_number_of_lines(data->start_map, path) + 1;
 	close(fd);
+	count = get_number_of_lines(data->start_map, path) + 1;
 	if (fill_array_2d(data, count, data->start_map, path))
 		return (0);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 11:45:30 by adardour          #+#    #+#             */
-/*   Updated: 2023/09/07 20:36:33 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/08 14:17:46 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	validate_element(char **argv, int reached_map, t_data *data)
 	}
 	if (flags > 6)
 		return (free(line), 0);
-	data->start_map = line;
+	data->start_map = ft_strdup(line);
 	free(line);
 	return (1);
 }
