@@ -22,8 +22,8 @@ all: $(NAME)
 $(NAME): $(OBJ) 
 	$(CC) $(OBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME) 
 
-%.o: %.c ./include/cub.h  ./include/parsing.h 
-	$(CC) -O3 -Imlx -c $< -o $@
+%.o: %.c ./include/cub.h  ./include/parsing.h ./parsing/get_next_line/get_next_line.h 
+	$(CC)  -O3 -Imlx -c $< -o $@
 
 clean:
 	rm -f $(OBJ) 

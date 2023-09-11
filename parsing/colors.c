@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adardour <adardour@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aalami <aalami@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 20:30:46 by adardour          #+#    #+#             */
-/*   Updated: 2023/09/01 16:21:01 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/08 18:16:51 by aalami           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ int	check_digits(char *color)
 
 int	check_range(t_ceiling ceiling, t_floor floor)
 {
-	if ((atoi(ceiling.r) > 255 || atoi(ceiling.r) < 0) || \
-	(atoi(ceiling.g) > 255 || atoi(ceiling.g) < 0) || \
-	atoi(ceiling.b) > 255 || atoi(ceiling.b) < 0)
+	if ((ft_atoi(ceiling.r) > 255 || ft_atoi(ceiling.r) < 0) || \
+	(ft_atoi(ceiling.g) > 255 || ft_atoi(ceiling.g) < 0) || \
+	ft_atoi(ceiling.b) > 255 || ft_atoi(ceiling.b) < 0)
 		return (0);
-	else if ((atoi(floor.r) > 255 || atoi(floor.r) < 0) || \
-	(atoi(floor.g) > 255 || atoi(floor.g) < 0) || \
-	atoi(floor.b) > 255 || atoi(floor.b) < 0)
+	else if ((ft_atoi(floor.r) > 255 || ft_atoi(floor.r) < 0) || \
+	(ft_atoi(floor.g) > 255 || ft_atoi(floor.g) < 0) || \
+	ft_atoi(floor.b) > 255 || ft_atoi(floor.b) < 0)
 		return (0);
 	return (1);
 }

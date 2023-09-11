@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:48:32 by adardour          #+#    #+#             */
-/*   Updated: 2023/09/08 15:38:04 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/08 22:51:37 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ int	parse_map(t_data *data, int reached_map, char *path)
 {
 	int		fd;
 	char	*line;
-	char	*start_map;
 	int		count;
 
 	fd = open(path, O_RDWR, 0777);
+	(void)reached_map;
 	if (fd == -1)
 		exit(1);
 	line = get_next_line(fd);

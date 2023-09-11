@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:39:08 by aalami            #+#    #+#             */
-/*   Updated: 2023/09/08 17:41:08 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/09 16:34:11 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ int	main(int argc, char **argv)
 	if (!data)
 		return (perror(""), 1);
 	init(data); 
-	if (!check_last(argv[1]) || \
-	parsing(argv, reached_map, fd, data) || reached_map < 6)
+	if ((!check_last(argv[1]) || \
+	parsing(argv, reached_map, fd, data)) && reached_map < 6)
 	{
 		printf("error parsing\n");
 		exit (1);

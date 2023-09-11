@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalami <aalami@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 09:49:16 by aalami            #+#    #+#             */
-/*   Updated: 2023/09/05 18:26:31 by aalami           ###   ########.fr       */
+/*   Updated: 2023/09/10 18:47:01 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <unistd.h>
 # define TILE_SIZE 64
 # define MAP_SCALE 0.15
+# define MINIMAP_WIDTH 200
+# define MINIMAP_HEIGHT 200
 # define PI 3.141592
 # define FOV 1.02
 # define ARR_LEFT 123
@@ -30,6 +32,10 @@
 # define KEY_RIGHT 2
 # define KEY_LEFT 0
 # define KEY_EXIT 53
+# define SCREEN_WIDTH 800
+# define SCREEN_HEIGHT 600
+# define VIEWPORT_WIDTH 400
+# define VIEWPORT_HEIGHT 400
 # include "./parsing.h"
 
 typedef struct s_ray

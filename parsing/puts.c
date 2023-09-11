@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:48:05 by adardour          #+#    #+#             */
-/*   Updated: 2023/09/08 17:39:53 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/09 15:25:54 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int	just_check(char *color)
 			return (0);
 		i++;
 	}
+	if (i == 0)
+		return (0);
 	return (1);
 }
 
@@ -107,7 +109,6 @@ int	put_data(t_data *data, int fd, int *reached_map)
 {
 	char		*line;
 	char		**spliting;
-	static int	flags;
 
 	line = get_next_line(fd);
 	while (line != NULL)
@@ -117,13 +118,13 @@ int	put_data(t_data *data, int fd, int *reached_map)
 		!ft_strcmp(spliting[0], "WE") || \
 		!ft_strcmp(spliting[0], "EA") || \
 		!ft_strcmp(spliting[0], "NO"))
-			put(line, data, reached_map);
+			put(line, data, reached_map, spliting[0]);
 		else if (!ft_strcmp(spliting[0], "\n"))
 			(*reached_map)++;
-		else if (!ft_strcmp(spliting[0], "F") || \
-		!ft_strcmp(spliting[0], "C") || \
+		else if ((!ft_strcmp(spliting[0], "F") || \
+		!ft_strcmp(spliting[0], "C")) && \
 		!put_rgb(data, line, spliting[0], reached_map))
-			return (0);
+			return (free_things(spliting), free(line), 0);
 		free_things(spliting);
 		free(line);
 		line = get_next_line(fd);

@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:01:55 by adardour          #+#    #+#             */
-/*   Updated: 2023/09/08 17:40:19 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/09 13:18:35 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,15 @@ int	check_line_last(char *last)
 
 	i = 0;
 	count = 0;
+	if (last == NULL)
+		return (0);
 	while (last[i])
 	{
 		if (last[i] == ' ')
 			count++;
 		i++;
 	}
-	if (count == ft_strlen(last))
+	if ((size_t)count == ft_strlen(last))
 		return (0);
 	return (1);
 }

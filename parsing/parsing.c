@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 11:45:30 by adardour          #+#    #+#             */
-/*   Updated: 2023/09/08 16:41:53 by adardour         ###   ########.fr       */
+/*   Updated: 2023/09/08 22:59:54 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	validate_element(char **argv, int reached_map, t_data *data)
 	if (fd == -1)
 		return (perror(""), 0);
 	i = -1;
+	spliting = NULL;
 	line = get_next_line(fd);
 	while (line != NULL && ++i < reached_map)
 	{
@@ -57,9 +58,9 @@ int	validate_element(char **argv, int reached_map, t_data *data)
 		free(line);
 		line = get_next_line(fd);
 	}
-	if (flags > 6)
-		return (free(line), 0);
 	data->start_map = ft_strdup(line);
+	if (flags > 6 || !data->start_map)
+		return (free(line), 0);
 	free(line);
 	return (1);
 }

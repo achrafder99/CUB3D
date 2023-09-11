@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aalami <aalami@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 11:42:05 by adardour          #+#    #+#             */
-/*   Updated: 2023/09/05 20:42:42 by aalami           ###   ########.fr       */
+/*   Updated: 2023/09/11 14:11:23 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 
 int	render_map(t_mlx *mlx)
 {
+	// draw_minimap(mlx);
 	if (check_wall(mlx))
 	{
 		if (mlx->player.turn_direction != 0)
@@ -43,9 +44,6 @@ int	render_map(t_mlx *mlx)
 	}
 	cast_rays(mlx);
 	render_projection(mlx);
-	draw_map_img(mlx->map, mlx);
-	draw_player(mlx);
-	draw_rays(mlx);
 	mlx_put_image_to_window(mlx->mlx_init, \
 	mlx->mlx_win, mlx->img.img_ptr, 0, 0);
 	return (0);
